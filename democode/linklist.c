@@ -1,5 +1,8 @@
 #include "linklist.h"
 #include "draw.h"
+#include "file.h"
+#include "string.h"
+#include "windows.h"
 void pushrect(myrect* source)
 {
 	myrect* p = rect_head;
@@ -438,11 +441,25 @@ void Initlinklist10()
 
 }
 
-void open(char* path)
+int open()
 {
-
+	char szFile[MAX_PATH] = { 0 };
+	FileOpenDialog(szFile);//szFile中返回了再文件选择窗口选择得文件得路径
+	if (strlen(szFile) == 0)
+	{
+		MessageBox(NULL, "Please choose a File", "Waring", MB_OK | MB_ICONWARNING);
+		return 0;
+	}
+	return 1;
 }
-void save(char* path)
+int save()
 {
-
+	char szFile[MAX_PATH] = { 0 };
+	FileSaveDialog(szFile);//szFile中返回了再文件选择窗口选择得文件得路径
+	if (strlen(szFile) == 0)
+	{
+		MessageBox(NULL,"Please choose a File","Waring", MB_OK| MB_ICONWARNING);
+		return 0;
+	}
+	return 1;
 }

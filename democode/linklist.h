@@ -117,59 +117,58 @@ typedef struct moval  //椭圆
 myrect* rect_head;//空内容的链表头指针.其中的next指向第一个rect
 myrect* selected_rect;
 void pushrect(myrect* source);
-void poprect(myrect* source);
+
 
 
 myroundrect* roundrect_head;
 myroundrect* selected_roundrect;
 void pushroundrect(myroundrect* source);
-void poproundrect(myroundrect* source);
+
 
 mydiamond* diamond_head;//空内容的链表头指针.其中的next指向第一个
 mydiamond* selected_diamond;
 void pushdiamond(mydiamond* source);
-void popdiamond(mydiamond* source);
+
 
 myline* line_head;//空内容的链表头指针.其中的next指向第一个
 myline* selected_line;
 void pushline(myline* source);
-void popline(myline* source);
+
 
 mydashline* dashline_head;//空内容的链表头指针.其中的next指向第一个
 mydashline* selected_dashline;
 void pushdashline(mydashline* source);
-void popdashline(mydashline* source);
 
 
 mydirectionalconnection* directionalconnection_head;//空内容的链表头指针.其中的next指向第一个
 mydirectionalconnection* selected_directionalconnection;
 void pushdirectionalconnection(mydirectionalconnection* source);
-void popdirectionalconnection(mydirectionalconnection* source);
+
 
 
 mybidirectionalconnection* bidirectionalconnection_head;//空内容的链表头指针.其中的next指向第一个
 mybidirectionalconnection* selected_bidirectionalconnection;
 void pushbidirectionalconnection(mybidirectionalconnection* source);
-void popbidirectionalconnection(mybidirectionalconnection* source);
+
 
 
 myprocess* process_head;//空内容的链表头指针.其中的next指向第一个
 myprocess* selected_process;
 void pushprocess(myprocess* source);
-void popprocess(myprocess* source);
+
 
 mycircle* circle_head;//空内容的链表头指针.其中的next指向第一个
 mycircle* selected_circle;
 void pushcircle(mycircle* source);
-void popcircle(mycircle* source);
+
 
 myoval* oval_head;//空内容的链表头指针.其中的next指向第一个
 myoval* selected_oval;
 void pushoval(myoval* source);
-void popoval(myoval* source);
 
-void open(char* path);
-void save(char* path);
+
+int  open();
+int  save();
 
 //1-9分别是矩形、圆角矩形，详见draw.h的说明 
 void Initlinklist1();

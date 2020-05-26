@@ -3,6 +3,7 @@
 #include "operation.h"
 #include "file.h"
 #include "math.h"
+#include "windraw.h"
 char* bColors[] =
 {
 	"Black",
@@ -21,11 +22,11 @@ char* bColors[] =
 };
 void Initwin()
 {
+	//下方为menu中的各项字符串的数组
 	static char* menuListFile[] = { "File",
 		"New  | Ctrl-N", // 快捷键必须采用[Ctrl-X]格式，放在字符串的结尾
 		"Open | Ctrl-O",
 		"Save | Ctrl-S",
-		"Rename",
 		"Close",
 		"Exit" };
 	static char* menuListEdit[] = { "Edit",
@@ -40,7 +41,12 @@ void Initwin()
 		"Roundrec",
 		"Diamond",
 		"Line",
-		"Arrow" };
+		"directionalconnection" ,
+		"bidirectionalconnection",
+		"dashline",
+		"process",
+		"circle",
+		"oval"};
 	static char* menuListHelp[] = { "Help",
 		"About us",
 		"Short cuts list",
@@ -85,7 +91,7 @@ void Initwin()
 		"Alignment",
 		"L(default)",
 		"R"
-	}; 
+	};
 	static char* menuListPenSize[] =
 	{
 		"PenSize",
@@ -113,31 +119,129 @@ void Initwin()
 	h = fH * 1.5; // 控件高度
 	DefineColor("Black", 0, 0, 0);
 	SetPenColor("Black");
+	//画出整个窗口的各个区域
+	//由于电脑的尺寸问题，可能窗口会有部分挡住。可能需要手动拖拽窗口来解决
 	drawRectangle(x, y - 2 * h, winwidth, h, 0);
 	drawRectangle(x, 0, 10 * h, winheight - 2 * h, 0);
 	drawRectangle(10 * h, 0, winwidth - 8 * h, h, 0);
+	//将画笔颜色设置为亮灰
 	SetPenColor("Light Gray");
 	drawRectangle(10 * h, h, 8 * h, winheight - 3 * h, 1);
 	drawRectangle(winwidth - 8 * h, h, 8 * h, winheight - 3 * h, 1);
 	setMenuColors("Dark Gray", "White", "Black", "Yellow", 1);
 	drawMenuBar(0, y - h, winwidth, h);
+	//File菜单栏
 	selection = menuList(GenUIID(0), x, y - h, w, wlist, h, menuListFile, sizeof(menuListFile) / sizeof(menuListFile[0]));
-	if (selection == 2)
+
+	if (selection == 1)
 	{
-		char szFile[MAX_PATH] = { 0 };
-		FileOpenDialog(szFile);//szFile中返回了再文件选择窗口选择得文件得路径
+		system("demo.exe");//重新运行该程序
+	}
+	else if (selection == 2)
+	{
+		open();
 	}
 	else if (selection == 3)
 	{
-		char szFile[MAX_PATH] = { 0 };
-		FileSaveDialog(szFile);//szFile中返回了再文件选择窗口选择得文件得路径
+		save();
+	}
+	else if (selection == 4)
+	{
+		//close相当于将当前窗口关闭，询问是否保存文件
+		int k = MessageBox(NULL, "your file was not save yet, do you want to save and quit right now", "Waring", MB_YESNOCANCEL | MB_ICONINFORMATION / MB_ICONASTERISK);
+		if (k==IDYES)
+		{
+			if (save() == 1)		//如果用户选择是并且选择了保存路径则保存完毕之后退出程序
+			{
+				exit(0);
+				
+			}						//如果未选择保存路径则无事发生
+			
+		}
+		else if(k==IDNO)		//如果用户选择了否则直接退出
+		{
+			exit(0);
+		}
+		
+	}
+	else if (selection == 5)
+	{
+		exit(0);						//quit则直接退出
 	}
 	// Edit 菜单
-	selection = menuList(GenUIID(0), x + w, y - h, w, wlist, h, menuListEdit, sizeof(menuListEdit) / sizeof(menuListEdit[0]));
+	selection = menuList(GenUIID(0), x + w, y - h, 2*w, 2*wlist, h, menuListEdit, sizeof(menuListEdit) / sizeof(menuListEdit[0]));
+	if (selection == 6)
+	{
+		if (operate_flag == 2)
+		{
+			pop();
+			operate_flag = 0;
+		}
+	}
 	//Draw 菜单
-	selection = menuList(GenUIID(0), x + 2 * w, y - h, w, wlist, h, menuListDraw, sizeof(menuListDraw) / sizeof(menuListEdit[0]));
+	selection = menuList(GenUIID(0), x + 3 * w, y - h,2* w, 2*wlist, h, menuListDraw, sizeof(menuListDraw) / sizeof(menuListEdit[0]));
+	if (selection == 1)
+	{
+		operate_flag = 1;
+		click_count = 0;
+		draw_what = 1;
+	}
+	else if (selection == 2)
+	{
+		operate_flag = 1;
+		click_count = 0;
+		draw_what = 2;
+	}
+	else if (selection == 3)
+	{
+		operate_flag = 1;
+		click_count = 0;
+		draw_what = 3;
+	}
+	else if (selection == 4)
+	{
+		operate_flag = 1;
+		click_count = 0;
+		draw_what = 4;
+	}
+	else if (selection == 5)
+	{
+		operate_flag = 1;
+		click_count = 0;
+		draw_what = 5;
+	}
+	else if (selection == 6)
+	{
+		operate_flag = 1;
+		click_count = 0;
+		draw_what = 6;
+	}
+	else if (selection == 7)
+	{
+		operate_flag = 1;
+		click_count = 0;
+		draw_what = 7;
+	}
+	else if (selection == 8)
+	{
+		operate_flag = 1;
+		click_count = 0;
+		draw_what = 8;
+	}
+	else if (selection == 9)
+	{
+		operate_flag = 1;
+		click_count = 0;
+		draw_what = 9;
+	}
+	else if (selection == 10)
+	{
+		operate_flag = 1;
+		click_count = 0;
+		draw_what = 10;
+	}
 	// Help 菜单
-	selection = menuList(GenUIID(0), x + 3 * w, y - h, w, wlist, h, menuListHelp, sizeof(menuListHelp) / sizeof(menuListHelp[0]));
+	selection = menuList(GenUIID(0), x + 5 * w, y - h, 2*w, 2*wlist, h, menuListHelp, sizeof(menuListHelp) / sizeof(menuListHelp[0]));
 	drawMenuBar(44 * h, y - 2 * h, 10 * h, h);
 	selection = menuList(GenUIID(0), 44 * h, y - 2 * h, w, wlist, h, menuListColors1, sizeof(menuListColors1) / sizeof(menuListColors1[0]));
 	if (selection)
@@ -145,7 +249,7 @@ void Initwin()
 		filled_color = selection-1;
 		if (operate_flag == 2)
 		{
-			strcpy(selected_rect->fill_color, bColors[filled_color]);
+			changefillcolor(filled_color);
 			
 			
 		}
@@ -156,7 +260,7 @@ void Initwin()
 		front_color = selection - 1;
 		if (operate_flag == 2)
 		{
-			strcpy(selected_rect->front_color, bColors[front_color]);
+			changefontcolor(selection);
 			
 			
 		}
@@ -167,7 +271,7 @@ void Initwin()
 		alignment_flag = selection - 1;
 		if (operate_flag == 2)
 		{
-			selected_rect->alignment = alignment_flag == 0 ? 'L' : 'R';
+			changealigment(alignment_flag == 0 ? 'L' : 'R');
 		}
 	}
 	selection = menuList(GenUIID(0), 44 * h + 3 * w, y - 2 * h, w, wlist, h, menuListPenSize, sizeof(menuListPenSize) / sizeof(menuListAli[0]));
@@ -176,13 +280,49 @@ void Initwin()
 		PenSize = selection;
 		if (operate_flag == 2)
 		{
-			
+			switch (select_what)
+			{
+			case 4:
+			{
+				selected_line->pensize = selection;
+				break;
+			}
+			case 5:
+			{
+				selected_directionalconnection->pensize = selection;
+				break;
+			}
+			case 6:
+			{
+				selected_bidirectionalconnection->pensize = selection;
+				break;
+			}
+			case 7:
+			{
+				selected_dashline->pensize = selection;
+				break;
+			}
+			}
 		}
 	}
 	selection = menuList(GenUIID(0), 44 * h -w, y - 2 * h, w, wlist, h, menuListArrowstyle, sizeof(menuListArrowstyle) / sizeof(menuListArrowstyle[0]));
 	if (selection)
 	{
 		arrow_style = selection - 1;
+		if (operate_flag == 2)
+		{
+			switch (select_what)
+			{
+			case 5:
+			{
+				selected_directionalconnection->arrow_style = arrow_style;
+			}
+			case 6:
+			{
+				selected_bidirectionalconnection->arrow_style = arrow_style;
+			}
+			}
+		}
 	}
 }
 void InitButton()
@@ -194,12 +334,12 @@ void InitButton()
 	int    selection;
 	int enable_move_disc = 1;
 	setButtonColors("Light Gray", "Black", "Dark Gray", "Yellow", 1);
-	if (button(GenUIID(0), 0 * h, y - 2 * h, h, h, "←"))
+	if (button(GenUIID(0), 27 * h, y - 2 * h, 6*h, h, "Clockwise Rotate"))
 	{
 		// undo button
 	}
 
-	if (button(GenUIID(0), 1 * h, y - 2 * h, h, h, "→"))
+	if (button(GenUIID(0), 33 * h, y - 2 * h, 6*h, h, "AntiClockwise Rotate"))
 	{
 		//redo button
 	}
@@ -219,7 +359,7 @@ void InitButton()
 			operate_flag = 0;
 		}
 	}
-	if (button(GenUIID(0), 15 * h, y - 2 * h, 4 * h, h, "Grid"))
+	if (button(GenUIID(0), 15 * h, y - 2 * h, 4 * h, h, "Cut"))
 	{
 		//whether use grid lines
 	}
@@ -309,6 +449,10 @@ void InitButton()
 		if (button(GenUIID(0), 10 * h, 0, 4 * h, h, "filled"))
 		{
 			filled_flag *= -1;
+			if (operate_flag == 2)
+			{
+				changefillflag(filled_flag == 1 ? 1 : 0);
+			}
 		}
 	}
 	else
@@ -316,6 +460,10 @@ void InitButton()
 		if (button(GenUIID(0), 10 * h, 0, 4 * h, h, "unfilled"))
 		{
 			filled_flag *= -1;
+			if (operate_flag == 2)
+			{
+				changefillflag(filled_flag == 1 ? 1 : 0);
+			}
 		}
 	}
 	if (operate_flag == 0)
@@ -683,11 +831,7 @@ void MouseEventProcess(int x, int y, int button, int event)
 						y_1 = my;
 						break;
 					}
-					else if(mx > 18 * h && mx < winwidth - 8 * h && my<winheight - 3 * h && my>h)
-					{
-						operate_flag = 0;
-						break;
-					}
+
 				}
 			}
 			break;
@@ -828,10 +972,11 @@ void drawlinklist6()
 	mybidirectionalconnection* p = bidirectionalconnection_head->next;
 	while (p != NULL)
 	{
+		SetPenSize(p->pensize);
 		SetPenColor(p->fill_color);
 		drawBidirectionalconnection(p->x, p->y, p->dx, p->dy, p->fillflag,p->arrow_style);
 		p = p->next;
-
+		SetPenSize(1);
 	}
 	return;
 }

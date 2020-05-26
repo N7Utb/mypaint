@@ -24,4 +24,3 @@ int FileSaveDialog(char* path)
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 	return GetSaveFileName(&ofn);
 }
-

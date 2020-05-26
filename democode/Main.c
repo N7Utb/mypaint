@@ -12,7 +12,7 @@ void Main()
 	//SetWindowSize(10, 20);  // 如果屏幕尺寸不够，则按比例缩小
 	InitGraphics();
 	// 获得窗口尺寸
-	mytext[100] = "Please insert here";
+	strcpy(mytext, "Please insert here");
 	winwidth = GetWindowWidth();
 	winheight = GetWindowHeight();
 	filled_flag = 1;

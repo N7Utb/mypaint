@@ -88,6 +88,7 @@ void downer()
 #include "draw.h"
 #include "math.h" 
 
+
 void move(double x, double y)
 {
 	switch (select_what)
@@ -447,6 +448,236 @@ void downer()
 		break;
 	}
 
+
+	}
+}
+void changefillcolor(int para)
+{
+	switch (select_what)
+	{
+	case 1:
+	{
+		strcpy(selected_rect->fill_color, bColors[para]);
+		break;
+	}
+	case 2:
+	{
+		strcpy(selected_roundrect->fill_color, bColors[para]);
+		break;
+	}
+	case 3:
+	{
+		strcpy(selected_diamond->fill_color, bColors[para]);
+		break;
+	}
+	case 4:
+	{
+		strcpy(selected_line->pencolor, bColors[para]);
+		break;
+	}
+	case 5:
+	{
+		strcpy(selected_directionalconnection->fill_color, bColors[para]);
+		break;
+	}
+	case 6:
+	{
+		strcpy(selected_bidirectionalconnection->fill_color, bColors[para]);
+		break;
+	}
+	case 7:
+	{
+		strcpy(selected_dashline->pencolor, bColors[para]);
+		break;
+	}
+	case 8:
+	{
+		strcpy(selected_process->fill_color, bColors[para]);
+		break;
+	}
+	case 9:
+	{
+		strcpy(selected_circle->fill_color, bColors[para]);
+		break;
+	}
+	case 10:
+	{
+		strcpy(selected_oval->fill_color, bColors[para]);
+		break;
+
+	}
+
+	}
+}
+void changefontcolor(int para)
+{
+	switch (select_what)
+	{
+	case 1:
+	{
+		strcpy(selected_rect->front_color, bColors[para]);
+		break;
+	}
+	case 2:
+	{
+		strcpy(selected_roundrect->front_color, bColors[para]);
+		break;
+	}
+	case 3:
+	{
+		strcpy(selected_diamond->front_color, bColors[para]);
+		break;
+	}
+	case 4:
+	{
+
+		break;
+	}
+	case 5:
+	{
+		break;
+	}
+	case 6:
+	{
+
+		break;
+	}
+	case 7:
+	{
+
+		break;
+	}
+	case 8:
+	{
+		strcpy(selected_process->front_color, bColors[para]);
+		break;
+	}
+	case 9:
+	{
+		strcpy(selected_circle->front_color, bColors[para]);
+		break;
+	}
+	case 10:
+	{
+		strcpy(selected_oval->front_color, bColors[para]);
+		break;
+
+	}
+
+	}
+}
+void changealigment(char para)
+{
+	switch (select_what)
+	{
+	case 1:
+	{
+		strcpy(selected_rect->alignment, bColors[para]);
+		break;
+	}
+	case 2:
+	{
+		strcpy(selected_roundrect->alignment, bColors[para]);
+		break;
+	}
+	case 3:
+	{
+		strcpy(selected_diamond->alignment, bColors[para]);
+		break;
+	}
+	case 4:
+	{
+
+		break;
+	}
+	case 5:
+	{
+		break;
+	}
+	case 6:
+	{
+
+		break;
+	}
+	case 7:
+	{
+
+		break;
+	}
+	case 8:
+	{
+		strcpy(selected_process->alignment, bColors[para]);
+		break;
+	}
+	case 9:
+	{
+		strcpy(selected_circle->alignment, bColors[para]);
+		break;
+	}
+	case 10:
+	{
+		strcpy(selected_oval->alignment, bColors[para]);
+		break;
+
+	}
+
+	}
+}
+void changefillflag(int para)
+{
+	switch (select_what)
+	{
+	case 1:
+	{
+		selected_rect->fillflag = para;
+		break;
+	}
+	case 2:
+	{
+		selected_roundrect->fillflag = para;
+		break;
+	}
+	case 3:
+	{
+		selected_diamond->fillflag = para;
+		break;
+	}
+	case 4:
+	{
+
+		break;
+	}
+	case 5:
+	{
+		selected_directionalconnection->fillflag = para;
+		break;
+	}
+	case 6:
+	{
+		selected_bidirectionalconnection->fillflag = para;
+		break;
+	}
+	case 7:
+	{
+
+		break;
+	}
+	case 8:
+	{
+		selected_process->fillflag = para;
+		break;
+	}
+	case 9:
+	{
+		selected_circle->fillflag = para;
+		break;
+	}
+	case 10:
+	{
+		selected_oval->fillflag = para;
+		break;
+
+	}
 
 	}
 }

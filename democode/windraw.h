@@ -25,7 +25,7 @@
 #include "imgui.h"
 
 double winwidth, winheight, h;
-char mytext[100];
+char mytext[100],*bColors[100];
 void CharEventProcess(char ch);
 void TimerEventProcess(int timerID);
 void MouseEventProcess(int x, int y, int button, int event);
