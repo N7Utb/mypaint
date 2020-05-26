@@ -181,4 +181,19 @@ void Initlinklist7();
 void Initlinklist8();
 void Initlinklist9();
 void Initlinklist10(); 
+/*5/25
+ *添加：
+ *关于图形链表文件存储的相关函数声明
+*/
+FILE* fp;
+void savemyrect(myrect* source);
+void savemyroundrect(myroundrect* source);
+void savemymdiamond(mydiamond* source);
+void savemyline(myline* source);
+void savemydashline(mydashline* source);
+void savemydirectionalconnection(mydirectionalconnection* source);
+void savemybidirectionalconnection(mybidirectionalconnection* source);
+void savemyprocess(myprocess* source);
+void savemycircle(mycircle* source);
+void savemyoval(myoval* source);
 #endif

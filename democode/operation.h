@@ -11,7 +11,8 @@ void changefillflag(int para);
 void move(double x, double y);
 void upper();
 void downer();
-void roundrectrotate(myroundrect* source, double angle);
+void clockwiserotate();
+void anticlockwiserotate();
 
 
 #endif

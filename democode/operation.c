@@ -88,7 +88,7 @@ void downer()
 #include "draw.h"
 #include "math.h" 
 
-
+//将选中得图形元
 void move(double x, double y)
 {
 	switch (select_what)
@@ -572,17 +572,17 @@ void changealigment(char para)
 	{
 	case 1:
 	{
-		strcpy(selected_rect->alignment, bColors[para]);
+		selected_rect->alignment = para;
 		break;
 	}
 	case 2:
 	{
-		strcpy(selected_roundrect->alignment, bColors[para]);
+		selected_roundrect->alignment = para;
 		break;
 	}
 	case 3:
 	{
-		strcpy(selected_diamond->alignment, bColors[para]);
+		selected_rect->alignment = para;
 		break;
 	}
 	case 4:
@@ -606,17 +606,17 @@ void changealigment(char para)
 	}
 	case 8:
 	{
-		strcpy(selected_process->alignment, bColors[para]);
+		selected_process->alignment = para;
 		break;
 	}
 	case 9:
 	{
-		strcpy(selected_circle->alignment, bColors[para]);
+		selected_circle->alignment = para;
 		break;
 	}
 	case 10:
 	{
-		strcpy(selected_oval->alignment, bColors[para]);
+		selected_oval->alignment = para;
 		break;
 
 	}
@@ -680,4 +680,12 @@ void changefillflag(int para)
 	}
 
 	}
+}
+void clockwiserotate()
+{
+
+}
+void anticlockwiserotate()
+{
+
 }

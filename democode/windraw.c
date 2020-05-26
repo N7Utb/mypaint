@@ -1,4 +1,4 @@
-#include "windraw.h"
+ï»¿#include "windraw.h"
 #include "draw.h"
 #include "operation.h"
 #include "file.h"
@@ -22,9 +22,9 @@ char* bColors[] =
 };
 void Initwin()
 {
-	//ÏÂ·½ÎªmenuÖÐµÄ¸÷Ïî×Ö·û´®µÄÊý×é
+	//ä¸‹æ–¹ä¸ºmenuä¸­çš„å„é¡¹å­—ç¬¦ä¸²çš„æ•°ç»„
 	static char* menuListFile[] = { "File",
-		"New  | Ctrl-N", // ¿ì½Ý¼ü±ØÐë²ÉÓÃ[Ctrl-X]¸ñÊ½£¬·ÅÔÚ×Ö·û´®µÄ½áÎ²
+		"New  | Ctrl-N", // å¿«æ·é”®å¿…é¡»é‡‡ç”¨[Ctrl-X]æ ¼å¼ï¼Œæ”¾åœ¨å­—ç¬¦ä¸²çš„ç»“å°¾
 		"Open | Ctrl-O",
 		"Save | Ctrl-S",
 		"Close",
@@ -89,8 +89,9 @@ void Initwin()
 	static char* menuListAli[] =
 	{
 		"Alignment",
-		"L(default)",
-		"R"
+		"L",
+		"R",
+		"C(default)"
 	};
 	static char* menuListPenSize[] =
 	{
@@ -110,32 +111,32 @@ void Initwin()
 	double fH = GetFontHeight();
 	double x = 0; //fH/8;
 	double y = winheight;
-	double w = TextStringWidth(menuListFile[0]) * 4; // Ö÷²Ëµ¥¿í¶È
+	double w = TextStringWidth(menuListFile[0]) * 4; // ä¸»èœå•å®½åº¦
 	double wlist = TextStringWidth(menuListFile[1]) * 1.2;
-	double xindent = winheight / 20; // Ëõ½ø
+	double xindent = winheight / 20; // ç¼©è¿›
 	int    selection;
 	int enable_move_disc = 1;
 	// menu bar
-	h = fH * 1.5; // ¿Ø¼þ¸ß¶È
+	h = fH * 1.5; // æŽ§ä»¶é«˜åº¦
 	DefineColor("Black", 0, 0, 0);
 	SetPenColor("Black");
-	//»­³öÕû¸ö´°¿ÚµÄ¸÷¸öÇøÓò
-	//ÓÉÓÚµçÄÔµÄ³ß´çÎÊÌâ£¬¿ÉÄÜ´°¿Ú»áÓÐ²¿·Öµ²×¡¡£¿ÉÄÜÐèÒªÊÖ¶¯ÍÏ×§´°¿ÚÀ´½â¾ö
+	//ç”»å‡ºæ•´ä¸ªçª—å£çš„å„ä¸ªåŒºåŸŸ
+	//ç”±äºŽç”µè„‘çš„å°ºå¯¸é—®é¢˜ï¼Œå¯èƒ½çª—å£ä¼šæœ‰éƒ¨åˆ†æŒ¡ä½ã€‚å¯èƒ½éœ€è¦æ‰‹åŠ¨æ‹–æ‹½çª—å£æ¥è§£å†³
 	drawRectangle(x, y - 2 * h, winwidth, h, 0);
 	drawRectangle(x, 0, 10 * h, winheight - 2 * h, 0);
 	drawRectangle(10 * h, 0, winwidth - 8 * h, h, 0);
-	//½«»­±ÊÑÕÉ«ÉèÖÃÎªÁÁ»Ò
+	//å°†ç”»ç¬”é¢œè‰²è®¾ç½®ä¸ºäº®ç°
 	SetPenColor("Light Gray");
 	drawRectangle(10 * h, h, 8 * h, winheight - 3 * h, 1);
 	drawRectangle(winwidth - 8 * h, h, 8 * h, winheight - 3 * h, 1);
 	setMenuColors("Dark Gray", "White", "Black", "Yellow", 1);
 	drawMenuBar(0, y - h, winwidth, h);
-	//File²Ëµ¥À¸
+	//Fileèœå•æ 
 	selection = menuList(GenUIID(0), x, y - h, w, wlist, h, menuListFile, sizeof(menuListFile) / sizeof(menuListFile[0]));
 
 	if (selection == 1)
 	{
-		system("demo.exe");//ÖØÐÂÔËÐÐ¸Ã³ÌÐò
+		system("demo.exe");//é‡æ–°è¿è¡Œè¯¥ç¨‹åº
 	}
 	else if (selection == 2)
 	{
@@ -147,18 +148,18 @@ void Initwin()
 	}
 	else if (selection == 4)
 	{
-		//closeÏàµ±ÓÚ½«µ±Ç°´°¿Ú¹Ø±Õ£¬Ñ¯ÎÊÊÇ·ñ±£´æÎÄ¼þ
+		//closeç›¸å½“äºŽå°†å½“å‰çª—å£å…³é—­ï¼Œè¯¢é—®æ˜¯å¦ä¿å­˜æ–‡ä»¶
 		int k = MessageBox(NULL, "your file was not save yet, do you want to save and quit right now", "Waring", MB_YESNOCANCEL | MB_ICONINFORMATION / MB_ICONASTERISK);
 		if (k==IDYES)
 		{
-			if (save() == 1)		//Èç¹ûÓÃ»§Ñ¡ÔñÊÇ²¢ÇÒÑ¡ÔñÁË±£´æÂ·¾¶Ôò±£´æÍê±ÏÖ®ºóÍË³ö³ÌÐò
+			if (save() == 1)		//å¦‚æžœç”¨æˆ·é€‰æ‹©æ˜¯å¹¶ä¸”é€‰æ‹©äº†ä¿å­˜è·¯å¾„åˆ™ä¿å­˜å®Œæ¯•ä¹‹åŽé€€å‡ºç¨‹åº
 			{
 				exit(0);
 				
-			}						//Èç¹ûÎ´Ñ¡Ôñ±£´æÂ·¾¶ÔòÎÞÊÂ·¢Éú
+			}						//å¦‚æžœæœªé€‰æ‹©ä¿å­˜è·¯å¾„åˆ™æ— äº‹å‘ç”Ÿ
 			
 		}
-		else if(k==IDNO)		//Èç¹ûÓÃ»§Ñ¡ÔñÁË·ñÔòÖ±½ÓÍË³ö
+		else if(k==IDNO)		//å¦‚æžœç”¨æˆ·é€‰æ‹©äº†å¦åˆ™ç›´æŽ¥é€€å‡º
 		{
 			exit(0);
 		}
@@ -166,9 +167,9 @@ void Initwin()
 	}
 	else if (selection == 5)
 	{
-		exit(0);						//quitÔòÖ±½ÓÍË³ö
+		exit(0);						//quitåˆ™ç›´æŽ¥é€€å‡º
 	}
-	// Edit ²Ëµ¥
+	// Edit èœå•
 	selection = menuList(GenUIID(0), x + w, y - h, 2*w, 2*wlist, h, menuListEdit, sizeof(menuListEdit) / sizeof(menuListEdit[0]));
 	if (selection == 6)
 	{
@@ -178,7 +179,7 @@ void Initwin()
 			operate_flag = 0;
 		}
 	}
-	//Draw ²Ëµ¥
+	//Draw èœå•
 	selection = menuList(GenUIID(0), x + 3 * w, y - h,2* w, 2*wlist, h, menuListDraw, sizeof(menuListDraw) / sizeof(menuListEdit[0]));
 	if (selection == 1)
 	{
@@ -240,9 +241,33 @@ void Initwin()
 		click_count = 0;
 		draw_what = 10;
 	}
-	// Help ²Ëµ¥
+	// Help èœå•
 	selection = menuList(GenUIID(0), x + 5 * w, y - h, 2*w, 2*wlist, h, menuListHelp, sizeof(menuListHelp) / sizeof(menuListHelp[0]));
+	if (selection == 1)
+	{
+		//system("notepad Aboutus.txt");
+		//About us åŠŸèƒ½ï¼Œå½“æŒ‰ä¸‹ç¡®å®šæ—¶ï¼Œå°†æ‰“å¼€æµè§ˆå™¨å‰å¾€githubä»“åº“ä¸»é¡µ
+		if (MessageBox(NULL, "About us\nBased on libgraphics, we design process - drawing.\n\nAnd now we can provide you with a full - featured drawing tool, which support drawingand editing some simple algorithm flow charts, with file savingand reading functions.\n\nIt has a cleanand simple interfaceand is easy to use.I hope you will like it.\n\nNow you can have a try with graphics!\n\n go to github and know more about us", "About us", MB_OKCANCEL) == IDOK)
+		{
+			system("start https://github.com/Vainlory/mypaint.git");
+		}
+	}
+	else if (selection == 2)
+	{
+		if(MessageBox(NULL,"Copy | Ctrl+C\nPaste | Ctrl+V\nWant to see more please go to our home","Shortcut List",MB_OKCANCEL)==IDOK)
+		{
+			system("start https://github.com/Vainlory/mypaint.git");
+		}
+	}
+	else if (selection == 3)
+	{
+		if (MessageBox(NULL, "You know how to use this application,right?\nWhat?You don't know?Really?\nOK,We can't say how to use this application in two lines\n and as the ususal you can goto our page\nI don't think you will click at this OK button \n ","I don't want to say this anymore", MB_OKCANCEL) == IDOK)
+		{
+			system("start https://github.com/Vainlory/mypaint.git");
+		}
+	}
 	drawMenuBar(44 * h, y - 2 * h, 10 * h, h);
+	//å¡«å……é¢œè‰²èœå•
 	selection = menuList(GenUIID(0), 44 * h, y - 2 * h, w, wlist, h, menuListColors1, sizeof(menuListColors1) / sizeof(menuListColors1[0]));
 	if (selection)
 	{
@@ -254,6 +279,7 @@ void Initwin()
 			
 		}
 	}
+	//å­—ä½“é¢œè‰²èœå•
 	selection = menuList(GenUIID(0), 44 * h+w, y -2*  h, w, wlist, h, menuListColors2, sizeof(menuListColors2) / sizeof(menuListColors2[0]));
 	if (selection)
 	{
@@ -265,15 +291,17 @@ void Initwin()
 			
 		}
 	}
-	selection = menuList(GenUIID(0), 44 * h+2*w, y - 2 * h, w, wlist, h, menuListAli, sizeof(menuListAli) / sizeof(menuListAli[0]));
+	//å¯¹é½èœå•
+	selection = menuList(GenUIID(0), 44 * h + 2 * w, y - 2 * h, w, wlist, h, menuListAli, sizeof(menuListAli) / sizeof(menuListAli[0]));
 	if (selection)
 	{
 		alignment_flag = selection - 1;
 		if (operate_flag == 2)
 		{
-			changealigment(alignment_flag == 0 ? 'L' : 'R');
+			changealigment(table[alignment_flag]);
 		}
 	}
+	//çº¿å®½èœå•
 	selection = menuList(GenUIID(0), 44 * h + 3 * w, y - 2 * h, w, wlist, h, menuListPenSize, sizeof(menuListPenSize) / sizeof(menuListAli[0]));
 	if (selection)
 	{
@@ -305,6 +333,7 @@ void Initwin()
 			}
 		}
 	}
+	//ç®­å¤´æ ·å¼èœå•
 	selection = menuList(GenUIID(0), 44 * h -w, y - 2 * h, w, wlist, h, menuListArrowstyle, sizeof(menuListArrowstyle) / sizeof(menuListArrowstyle[0]));
 	if (selection)
 	{
@@ -316,10 +345,12 @@ void Initwin()
 			case 5:
 			{
 				selected_directionalconnection->arrow_style = arrow_style;
+				break;
 			}
 			case 6:
 			{
 				selected_bidirectionalconnection->arrow_style = arrow_style;
+				break;
 			}
 			}
 		}
@@ -330,27 +361,36 @@ void InitButton()
 	double fH = GetFontHeight();
 	double x = 0; //fH/8;
 	double y = winheight;
-	double xindent = winheight / 20; // Ëõ½ø
+	double xindent = winheight / 20; // ç¼©è¿›
 	int    selection;
 	int enable_move_disc = 1;
 	setButtonColors("Light Gray", "Black", "Dark Gray", "Yellow", 1);
-	if (button(GenUIID(0), 27 * h, y - 2 * h, 6*h, h, "Clockwise Rotate"))
+	//å¯¹é€‰ä¸­å¾—å›¾å½¢æ—‹è½¬æŒ‰é’®
+	if (button(GenUIID(0), 27 * h, y - 2 * h, 6 * h, h, "Clockwise Rotate"))
 	{
-		// undo button
+		if (operate_flag == 2)
+		{
+			clockwiserotate();
+		}
 	}
 
-	if (button(GenUIID(0), 33 * h, y - 2 * h, 6*h, h, "AntiClockwise Rotate"))
+	if (button(GenUIID(0), 33 * h, y - 2 * h, 6 * h, h, "AntiClockwise Rotate"))
 	{
-		//redo button
+		if (operate_flag == 2)
+		{
+			anticlockwiserotate();
+		}
 	}
+
 	if (button(GenUIID(0), 3 * h, y - 2 * h, 4 * h, h, "Save"))
 	{
-		//Save button
+		save();
 	}
 	if (button(GenUIID(0), 7 * h, y - 2 * h, 4 * h, h, "Open"))
 	{
-		//Open button
+		open();
 	}
+	//å¯¹äºŽé€‰ä¸­å¾—å›¾å½¢è¿›è¡Œåˆ é™¤æŒ‰é’®
 	if (button(GenUIID(0), 11 * h, y - 2 * h, 4 * h, h, "Delete"))
 	{
 		if (operate_flag == 2)
@@ -361,11 +401,11 @@ void InitButton()
 	}
 	if (button(GenUIID(0), 15 * h, y - 2 * h, 4 * h, h, "Cut"))
 	{
-		//whether use grid lines
+		//cutæ“ä½œ
 	}
 	if (button(GenUIID(0), 19 * h, y - 2 * h, 4 * h, h, "Copy"))
 	{
-		//
+		//æ‹·è´æ“ä½œ
 	}
 	if (button(GenUIID(0), 23 * h, y - 2 * h, 4 * h, h, "Paste"))
 	{
@@ -403,48 +443,49 @@ void InitButton()
 	}
 	if (button(GenUIID(0), 0, y - 12 * h, 10 * h, 2 * h, "Directional connection"))
 	{
-		//draw directional connection µ¥Ïò¼ýÍ·
+		//draw directional connection å•å‘ç®­å¤´
 		operate_flag = 1;
 		click_count = 0;
 		draw_what = 5;
 	}
 	if (button(GenUIID(0), 0, y - 14 * h, 10 * h, 2 * h, "Bidirectional connection"))
 	{
-		//draw Ë«Ïò¼ýÍ·
+		//draw åŒå‘ç®­å¤´
 		operate_flag = 1;
 		click_count = 0;
 		draw_what = 6;
 	}
 	if (button(GenUIID(0), 0, y - 16 * h, 10 * h, 2 * h, "Dashed line"))
 	{
-		//draw dashed line ÐéÏß
+		//draw dashed line è™šçº¿
 		operate_flag = 1;
 		click_count = 0;
 		draw_what = 7;
 	}
 	if (button(GenUIID(0), 0, y - 18 * h, 10 * h, 2 * h, "Parallelogram"))
 	{
-         //draw process
+		//draw process
 		operate_flag = 1;
 		click_count = 0;
-		draw_what = 8 ;
+		draw_what = 8;
 	}
 	if (button(GenUIID(0), 0, y - 20 * h, 10 * h, 2 * h, "Circle"))
 	{
-        //draw circle  Ô²
+		//draw circle  åœ†
 		operate_flag = 1;
 		click_count = 0;
 		draw_what = 9;
 	}
 	if (button(GenUIID(0), 0, y - 22 * h, 10 * h, 2 * h, "Oval"))
 	{
-        //draw oval  ÍÖÔ² 
+		//draw oval  æ¤­åœ† 
 		operate_flag = 1;
 		click_count = 0;
 		draw_what = 10;
 	}
 	setButtonColors("Light Gray", "Black", "Dark Gray", "Black", 0);
-	if (filled_flag==1)
+	//æ˜¯å¦å¡«å……æŒ‰é’®
+	if (filled_flag == 1)
 	{
 		if (button(GenUIID(0), 10 * h, 0, 4 * h, h, "filled"))
 		{
@@ -466,6 +507,25 @@ void InitButton()
 			}
 		}
 	}
+	/*if (music_flag == 0)
+	{
+		if (button(GenUIID(0), 14 * h, 0, 4 * h, h, "Silent"))
+		{
+			music_flag = 1;
+			mciSendString("play bkmusic repeat", NULL, 0, NULL);
+		}
+		
+	}
+	else if (music_flag == 1)
+	{
+		if (button(GenUIID(0), 14 * h, 0, 4 * h, h, "Music on"))
+		{
+			music_flag = 0;
+			mciSendString("stop bkmusic repeat", NULL, 0, NULL);
+		}
+	}
+	*/
+		//ä¸‹æ–¹ç»˜åˆ¶çŠ¶æ€æ 
 	if (operate_flag == 0)
 		drawLabel(winwidth - 6 * h, 0.25 * h, "No operation");
 	else if (operate_flag == 1)
@@ -474,10 +534,12 @@ void InitButton()
 		drawLabel(winwidth - 6 * h, 0.25 * h, "Selecting");
 	else if (operate_flag == 3)
 		drawLabel(winwidth - 6 * h, 0.25 * h, "Moving");
+	//æ˜¾ç¤ºå½“å‰å¾—å­—ä½“é¢œè‰²å’Œå¡«å……é¢œè‰²
 	drawLabel(winwidth - 13 * h, 0.25 * h, "Front Color:");
 	drawLabel(winwidth - 9.5 * h, 0.25 * h, bColors[front_color]);
 	drawLabel(winwidth - 19 * h, 0.25 * h, "Fill Color:");
 	drawLabel(winwidth - 16 * h, 0.25 * h, bColors[filled_color]);
+	//å®žçŽ°æ–‡æœ¬è¾“å…¥å¾—æ–‡æœ¬æ¡†
 	if (textbox(GenUIID(0), 18 * h, 0, 10 * h, h, mytext, 100))
 	{
 		if (operate_flag == 2)
@@ -499,6 +561,21 @@ void InitButton()
 				strcpy(selected_diamond->text, mytext);
 				break;
 			}
+			case 8:
+			{
+				strcpy(selected_process->text, mytext);
+				break;
+			}
+			case 9:
+			{
+				strcpy(selected_circle->text, mytext);
+				break;
+			}
+			case 10:
+			{
+				strcpy(selected_oval->text, mytext);
+				break;
+			}
 			}
 		}
 	}
@@ -507,9 +584,9 @@ void InitButton()
 
 
 
-/* »­Ò»¸öÔ²½Ç¾ØÐÎ */
+	/* ç”»ä¸€ä¸ªåœ†è§’çŸ©å½¢ */
 void drawRoundrec(double x, double y, double w, double h, int fillflag)
-{
+	{
 	MovePen(x, y);
 	if( fillflag ) StartFilledRegion(1); 
 	{
@@ -525,7 +602,7 @@ void drawRoundrec(double x, double y, double w, double h, int fillflag)
 	if( fillflag ) EndFilledRegion();
 }
 
-/* »­Ò»¸öÁâÐÎ */
+/* ç”»ä¸€ä¸ªè±å½¢ */
 void drawDiamond(double x, double y, double w, double h, int fillflag)
 {
 	MovePen(x, y+h/2);
@@ -539,7 +616,7 @@ void drawDiamond(double x, double y, double w, double h, int fillflag)
 	if( fillflag ) EndFilledRegion();
 }
 
-/*»­Ò»¸öÔ² */
+/*ç”»ä¸€ä¸ªåœ† */
 void drawCircle(double x, double y, double r,int fillflag)
 {
 	
@@ -553,14 +630,14 @@ void drawCircle(double x, double y, double r,int fillflag)
  } 
 
 
-/* »­Ò»ÌõÖ±Ïß */
+/* ç”»ä¸€æ¡ç›´çº¿ */
 void drawLine(double x1,double y1,double dx,double dy)
 { 
 	MovePen(x1, y1);
 	DrawLine(dx, dy);
 }
 
-/*»­Ò»ÌõÐéÏß */ 
+/*ç”»ä¸€æ¡è™šçº¿ */ 
 void drawDashline(double x1,double y1,double dx, double dy)
 {
 	int i;
@@ -573,7 +650,7 @@ void drawDashline(double x1,double y1,double dx, double dy)
 	}
 	 
 }
-/*»­Ò»¸öµ¥Ïò¼ýÍ·*/ 
+/*ç”»ä¸€ä¸ªå•å‘ç®­å¤´*/ 
 void drawDirectionalconnection(double x, double y, double dx, double dy, int fillflag, int arrow_style)
 {
 	
@@ -605,7 +682,7 @@ void drawDirectionalconnection(double x, double y, double dx, double dy, int fil
 	}
 }
 
-/*»­Ò»¸öË«Ïò¼ýÍ·*/ 
+/*ç”»ä¸€ä¸ªåŒå‘ç®­å¤´*/ 
 void drawBidirectionalconnection(double x, double y, double dx, double dy, int fillflag, int arrow_style)
 {
 	double sin = dy / (sqrt(dy * dy + dx * dx));
@@ -615,7 +692,7 @@ void drawBidirectionalconnection(double x, double y, double dx, double dy, int f
 	drawDirectionalconnection(x+0.5*dx, y+0.5*dy, -0.5*dx, -0.5*dy, fillflag, arrow_style);
 }
 
-/*»­Ò»¸öÍÖÔ²*/ 
+/*ç”»ä¸€ä¸ªæ¤­åœ†*/ 
 void drawOval(double x, double y, double rx,double ry,int fillflag)
 {
 	
@@ -627,7 +704,7 @@ void drawOval(double x, double y, double rx,double ry,int fillflag)
 	if( fillflag ) EndFilledRegion();
 	
  } 
-/* »­Ò»¸öprocess */
+/* ç”»ä¸€ä¸ªprocess */
 void drawProcess(double x, double y, double w, double h, int fillflag)
 {
 	MovePen(x, y);
@@ -645,26 +722,27 @@ void drawProcess(double x, double y, double w, double h, int fillflag)
 }
 
 
-/* »­Ò»¸öÔ²½Ç¾ØÐÎ£¬²¢ÔÚÆäÄÚ²¿¾ÓÖÐÏÔÊ¾Ò»¸ö×Ö·û´®±êÇ©label */
+/* ç”»ä¸€ä¸ªåœ†è§’çŸ©å½¢ï¼Œå¹¶åœ¨å…¶å†…éƒ¨å±…ä¸­æ˜¾ç¤ºä¸€ä¸ªå­—ç¬¦ä¸²æ ‡ç­¾label */
 void drawRoundrecBox(double x, double y, double w, double h, int fillflag, char *label, char labelAlignment, char *labelColor)
 {
-	double fa = GetFontAscent();   //Õâ¸öÎÒ²»ÖªµÀ¸ÉÂïµÄ 
+	double fa = GetFontAscent();
 	//roundrec 
 	drawRoundrec(x,y,w,h,fillflag);
 	// text
-	if( label && strlen(label)>0 ) {
+	if( label && strlen(label)>0 )
+	{
 		mySetPenColor(labelColor);
 		if( labelAlignment=='L' )
 			MovePen(x+fa/2, y+h/2-fa/2);
 		else if( labelAlignment=='R' )
 			MovePen(x+w-fa/2-TextStringWidth(label), y+h/2-fa/2);
-		else // if( labelAlignment=='C'
+		else  if( labelAlignment=='C')
 			MovePen(x+(w-TextStringWidth(label))/2, y+h/2-fa/2);
 		DrawTextString(label);
 	}
 }
 
-/* »­Ò»¸öÁâÐÎ£¬²¢ÔÚÆäÄÚ²¿¾ÓÖÐÏÔÊ¾Ò»¸ö×Ö·û´®±êÇ©label */
+/* ç”»ä¸€ä¸ªè±å½¢ï¼Œå¹¶åœ¨å…¶å†…éƒ¨å±…ä¸­æ˜¾ç¤ºä¸€ä¸ªå­—ç¬¦ä¸²æ ‡ç­¾label */
 void drawDiamondBox(double x, double y, double w, double h, int fillflag, char *label, char labelAlignment, char *labelColor)
 {
 	double fa = GetFontAscent();
@@ -677,13 +755,13 @@ void drawDiamondBox(double x, double y, double w, double h, int fillflag, char *
 			MovePen(x+fa/2, y+h/2-fa/2);
 		else if( labelAlignment=='R' )
 			MovePen(x+w-fa/2-TextStringWidth(label), y+h/2-fa/2);
-		else // if( labelAlignment=='C'
+		else  if( labelAlignment=='C')
 			MovePen(x+(w-TextStringWidth(label))/2, y+h/2-fa/2);
 		DrawTextString(label);
 	}
 }
 
-/* »­Ò»¸öÔ²ÐÎ£¬²¢ÔÚÆäÄÚ²¿¾ÓÖÐÏÔÊ¾Ò»¸ö×Ö·û´®±êÇ©label */
+/* ç”»ä¸€ä¸ªåœ†å½¢ï¼Œå¹¶åœ¨å…¶å†…éƒ¨å±…ä¸­æ˜¾ç¤ºä¸€ä¸ªå­—ç¬¦ä¸²æ ‡ç­¾label */
 void drawCircleBox(double x, double y, double r, int fillflag, char *label, char labelAlignment, char *labelColor)
 {
 	double fa = GetFontAscent();
@@ -697,13 +775,13 @@ void drawCircleBox(double x, double y, double r, int fillflag, char *label, char
 			MovePen(x+fa/2, y+r/2-fa/2);
 		else if( labelAlignment=='R' )
 			MovePen(x+r-fa/2-TextStringWidth(label), y+r/2-fa/2);
-		else // if( labelAlignment=='C'
-			MovePen(x+(r-TextStringWidth(label))/2, y+r/2-fa/2);
+		else  if( labelAlignment=='C')
+			MovePen(x-(TextStringWidth(label))/2, y-fa/2);
 		DrawTextString(label);
 	}   
 }
 
-/* »­Ò»¸öoval£¬²¢ÔÚÆäÄÚ²¿¾ÓÖÐÏÔÊ¾Ò»¸ö×Ö·û´®±êÇ©label */
+/* ç”»ä¸€ä¸ªovalï¼Œå¹¶åœ¨å…¶å†…éƒ¨å±…ä¸­æ˜¾ç¤ºä¸€ä¸ªå­—ç¬¦ä¸²æ ‡ç­¾label */
 void drawOvalBox(double x, double y, double rx, double ry, int fillflag, char *label, char labelAlignment, char *labelColor)
 {
 	double fa = GetFontAscent();
@@ -716,12 +794,12 @@ void drawOvalBox(double x, double y, double rx, double ry, int fillflag, char *l
 			MovePen(x+fa/2, y+ry-fa/2);
 		else if( labelAlignment=='R' )
 			MovePen(x+2*rx-fa/2-TextStringWidth(label), y+ry-fa/2);
-		else // if( labelAlignment=='C'
+		else  if( labelAlignment=='C')
 			MovePen(x+(2*rx-TextStringWidth(label))/2, y+ry-fa/2);
 		DrawTextString(label);
 	}
 }
-/* »­Ò»¸öprocess£¬²¢ÔÚÆäÄÚ²¿¾ÓÖÐÏÔÊ¾Ò»¸ö×Ö·û´®±êÇ©label */
+/* ç”»ä¸€ä¸ªprocessï¼Œå¹¶åœ¨å…¶å†…éƒ¨å±…ä¸­æ˜¾ç¤ºä¸€ä¸ªå­—ç¬¦ä¸²æ ‡ç­¾label */
 void drawProcessBox(double x, double y, double w, double h, int fillflag, char *label, char labelAlignment, char *labelColor)
 {
 	double fa = GetFontAscent();
@@ -734,7 +812,7 @@ void drawProcessBox(double x, double y, double w, double h, int fillflag, char *
 			MovePen(x+fa/2, y+h/2-fa/2);
 		else if( labelAlignment=='R' )
 			MovePen(x+w-fa/2-TextStringWidth(label), y+h/2-fa/2);
-		else // if( labelAlignment=='C'
+		else  if( labelAlignment=='C')
 			MovePen(x+(w-TextStringWidth(label))/2, y+h/2-fa/2);
 		DrawTextString(label);
 	}
@@ -758,23 +836,23 @@ void display()
 }
 void CharEventProcess(char ch)
 {
-	uiGetChar(ch); // GUI×Ö·ûÊäÈë
-	display(); //Ë¢ÐÂÏÔÊ¾
+	uiGetChar(ch); // GUIå­—ç¬¦è¾“å…¥
+	display(); //åˆ·æ–°æ˜¾ç¤º
 }
 
-// ÓÃ»§µÄ¼üÅÌÊÂ¼þÏìÓ¦º¯Êý
+// ç”¨æˆ·çš„é”®ç›˜äº‹ä»¶å“åº”å‡½æ•°
 void KeyboardEventProcess(int key, int event)
 {
-	uiGetKeyboard(key, event); // GUI»ñÈ¡¼üÅÌ
+	uiGetKeyboard(key, event); // GUIèŽ·å–é”®ç›˜
 
 
 }
 
-// ÓÃ»§µÄÊó±êÊÂ¼þÏìÓ¦º¯Êý
+// ç”¨æˆ·çš„é¼ æ ‡äº‹ä»¶å“åº”å‡½æ•°
 void MouseEventProcess(int x, int y, int button, int event)
 {
 	double mx, my;
-	uiGetMouse(x, y, button, event); //GUI»ñÈ¡Êó±ê
+	uiGetMouse(x, y, button, event); //GUIèŽ·å–é¼ æ ‡
 	mx = ScaleXInches(x);/*pixels --> inches*/
 	my = ScaleYInches(y);/*pixels --> inches*/
 	display();
@@ -791,9 +869,9 @@ void MouseEventProcess(int x, int y, int button, int event)
 			{
 				if (operate_flag == 1)
 				{
-					if (mx > 18 * h && mx < winwidth - 8 * h && my<winheight - 3 * h && my>h)//µ±Êó±êÔÚ»­²¼ÇøÓò×ó»÷
+					if (mx > 18 * h && mx < winwidth - 8 * h && my<winheight - 3 * h && my>h)//å½“é¼ æ ‡åœ¨ç”»å¸ƒåŒºåŸŸå·¦å‡»
 					{
-						if (click_count == 0)				//µ±´ËÊ±ÊÇÈ¡µÚÒ»¸öµãÊ±£¬mx,myÎª×óÉÏµã
+						if (click_count == 0)				//å½“æ­¤æ—¶æ˜¯å–ç¬¬ä¸€ä¸ªç‚¹æ—¶ï¼Œmx,myä¸ºå·¦ä¸Šç‚¹
 						{
 							click_count = 1;
 							x_1 = mx;
@@ -813,9 +891,9 @@ void MouseEventProcess(int x, int y, int button, int event)
 				}								
 				else if (operate_flag == 0)
 				{
-					if (mx > 18 * h && mx < winwidth - 8 * h && my<winheight - 3 * h && my>h)//µ±Êó±êÔÚ»­²¼ÇøÓò×ó»÷
+					if (mx > 18 * h && mx < winwidth - 8 * h && my<winheight - 3 * h && my>h)//å½“é¼ æ ‡åœ¨ç”»å¸ƒåŒºåŸŸå·¦å‡»
 					{
-						if (click_count == 0)								//±éÀúËùÓÐµÃrect½á¹¹ÌåÈ·¶¨Ñ¡ÖÐµÃrect
+						if (click_count == 0)								//éåŽ†æ‰€æœ‰å¾—rectç»“æž„ä½“ç¡®å®šé€‰ä¸­å¾—rect
 						{
 							select_graphic(mx,my);
 							break;
@@ -878,7 +956,7 @@ void MouseEventProcess(int x, int y, int button, int event)
 	}
 }
 
-// ÓÃ»§µÄ¼ÆÊ±Æ÷Ê±¼äÏìÓ¦º¯Êý
+// ç”¨æˆ·çš„è®¡æ—¶å™¨æ—¶é—´å“åº”å‡½æ•°
 void TimerEventProcess(int timerID)
 {
 	if (2019 == timerID)
@@ -886,7 +964,7 @@ void TimerEventProcess(int timerID)
 		display();
 	}
 }
-void drawlinklist1()//n ÕÅlinklistÖÐ´¢´æ×Å¸÷¸öÍ¼Ôª¡¢Ã¿´Îdisplay¶¼»á½«ËùÓÐÁ´±íÖÐµÄÍ¼ÔªÊä³ö
+void drawlinklist1()//n å¼ linklistä¸­å‚¨å­˜ç€å„ä¸ªå›¾å…ƒã€æ¯æ¬¡displayéƒ½ä¼šå°†æ‰€æœ‰é“¾è¡¨ä¸­çš„å›¾å…ƒè¾“å‡º
 {
 	myrect* p = rect_head->next;
 	while (p != NULL)

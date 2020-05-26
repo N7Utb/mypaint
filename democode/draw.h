@@ -1,11 +1,11 @@
 
 #ifndef __DRAW_H
 #define __DRAW_H
-
+char table[3];
 double x_1,y_1, x_2,y_2;//用户的第一个点、第二个点
 int click_count;
 int operate_flag,filled_flag,draw_what,front_color,PenSize,select_what,arrow_style;
-int filled_color,alignment_flag;
+int filled_color,alignment_flag,music_flag;
 /*
 5/12
 draw_flag: 是否正在绘图

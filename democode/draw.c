@@ -17,7 +17,7 @@ char* acolor[20] = {
 		"Magenta",
 		"Cyan"
 };
-
+char table[3] = "LRC";
 
 void draw()
 {
@@ -97,7 +97,7 @@ void drawrectangle()  //»­¾ØÐÎ
 	}
 	a->text[strlen(mytext)] = 0;
 	a->fillflag = filled_flag==1?1:0;
-	a->alignment = alignment_flag==0?'L':'R';
+	a->alignment = table[alignment_flag];
 	a->text_flag = 1;
 	a->next = NULL;
 	strcpy(a->fill_color , acolor[filled_color]);
@@ -125,7 +125,7 @@ void drawroundrec()   //»æÖÆÔ²½Ç¾ØÐÎ
 	}
 	a->text[strlen(mytext)] = 0;
 	a->fillflag = filled_flag==1?1:0;
-	a->alignment = alignment_flag==0?'L':'R';
+	a->alignment = table[alignment_flag];
 	a->text_flag = 1;
 	a->next = NULL;
 	strcpy(a->fill_color , acolor[filled_color]);
@@ -153,7 +153,7 @@ void drawdiamond() //»­ÁâÐÎ
 	}
 	a->text[strlen(mytext)] = 0;
 	a->fillflag = filled_flag==1?1:0;
-	a->alignment = alignment_flag==0?'L':'R';
+	a->alignment = table[alignment_flag];
 	a->text_flag = 1;
 	a->next = NULL;
 	strcpy(a->fill_color , acolor[filled_color]);
@@ -258,7 +258,7 @@ void  drawbiddirectionalconnection()
 	}
 	a->text[strlen(mytext)] = 0;
 	a->fillflag = filled_flag==1?1:0;
-	a->alignment = alignment_flag==0?'L':'R';
+	a->alignment =  table[alignment_flag];
 	a->text_flag = 1;
 	a->next = NULL;
 	strcpy(a->fill_color , acolor[filled_color]);
@@ -284,7 +284,7 @@ void  drawbiddirectionalconnection()
 	}
 	a->text[strlen(mytext)] = 0;
 	a->fillflag = filled_flag==1?1:0;
-	a->alignment = alignment_flag==0?'L':'R';
+	a->alignment = table[alignment_flag];
 	a->text_flag = 1;
 	a->next = NULL;
 	strcpy(a->fill_color , acolor[filled_color]);
@@ -313,7 +313,7 @@ void  drawbiddirectionalconnection()
 	}
 	a->text[strlen(mytext)] = 0;
 	a->fillflag = filled_flag==1?1:0;
-	a->alignment = alignment_flag==0?'L':'R';
+	a->alignment = table[alignment_flag];
 	a->text_flag = 1;
 	a->next = NULL;
 	strcpy(a->fill_color , acolor[filled_color]);

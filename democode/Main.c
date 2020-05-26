@@ -15,15 +15,17 @@ void Main()
 	strcpy(mytext, "Please insert here");
 	winwidth = GetWindowWidth();
 	winheight = GetWindowHeight();
-	filled_flag = 1;
+	filled_flag = -1;
 	operate_flag = 0;
 	filled_color = 0;
 	front_color = 0;
+	alignment_flag = 2;
+	strcpy(table, "LRC");
 	registerCharEvent(CharEventProcess);        // 字符
 	registerKeyboardEvent(KeyboardEventProcess);// 键盘
 	registerMouseEvent(MouseEventProcess);      // 鼠标
 	registerTimerEvent(TimerEventProcess);      // 定时器
-
+	mciSendString("open Soldout.mp3", NULL, 0, NULL);
 	// 开启定时器
 	startTimer(2019, 256);
 	InitButton();
