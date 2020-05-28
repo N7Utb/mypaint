@@ -4,8 +4,9 @@
 char table[3];
 double x_1,y_1, x_2,y_2;//用户的第一个点、第二个点
 int click_count;
-int operate_flag,filled_flag,draw_what,front_color,PenSize,select_what,arrow_style;
-int filled_color,alignment_flag,music_flag;
+int operate_flag,filled_flag,draw_what,front_color,PenSize,select_what,arrow_style,copy_what;
+int filled_color,alignment_flag,music_flag,save_flag;
+void* copy_ptr,*draw_ptr,*select_ptr;
 /*
 5/12
 draw_flag: 是否正在绘图
@@ -29,32 +30,33 @@ draw_what:绘制图形的标志其中
 9:circle
 10:oval 
 */
-void drawrectangle();
+void drawrectangle(double mx,double my);
 
 
-void drawroundrec();
+void drawroundrec(double mx, double my);
 
 
-void drawline();
+void drawline(double mx, double my);
 
-void drawdiamond();
-
-
-void drawdirectionalconnection();
-
-void drawbiddirectionalconnection();
+void drawdiamond(double mx, double my);
 
 
-void drawdashline();
+void drawdirectionalconnection(double mx, double my);
 
-void drawprocess();
-
-
-void drawcircle();
+void drawbiddirectionalconnection(double mx, double my);
 
 
-void drawoval();
+void drawdashline(double mx, double my);
+
+void drawprocess(double mx, double my);
 
 
-void draw();
+void drawcircle(double mx, double my);
+
+
+void drawoval(double mx, double my);
+
+
+void draw(double mx,double my);
+void drawing(double mx, double my);
 #endif

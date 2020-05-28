@@ -1,3 +1,21 @@
+#include "graphics.h"
+#include "extgraph.h"
+#include "genlib.h"
+#include "simpio.h"
+#include "conio.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stddef.h>
+
+#include <windows.h>
+#include <olectl.h>
+#include <mmsystem.h>
+#include <wingdi.h>
+#include <ole2.h>
+#include <ocidl.h>
+#include <winuser.h>
+
+#include "imgui.h"
 
 #include "draw.h"
 #include "windraw.h"
@@ -5,6 +23,7 @@
 void Initwin();
 void display();
 void InitButton();
+void startTimer(int id, int timeinterval);
 void Main()
 {
 	SetWindowTitle("New file");
@@ -25,9 +44,14 @@ void Main()
 	registerKeyboardEvent(KeyboardEventProcess);// 键盘
 	registerMouseEvent(MouseEventProcess);      // 鼠标
 	registerTimerEvent(TimerEventProcess);      // 定时器
-	mciSendString("open Soldout.mp3", NULL, 0, NULL);
-	// 开启定时器
-	startTimer(2019, 256);
+	startTimer(1,2);
+
+	mciSendString((LPCSTR)"open SoldOut.mp3 alias a", NULL, 0, NULL);
+
+
+
+	copy_ptr = NULL;
+
 	InitButton();
 	Initwin();
 	Initlinklist1();

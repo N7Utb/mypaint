@@ -30,8 +30,6 @@ void Initwin()
 		"Close",
 		"Exit" };
 	static char* menuListEdit[] = { "Edit",
-		"Undo   | Ctrl-Z",
-		"Redo   | Ctrl-Y",
 		"Cut    | Ctrl-X",
 		"Copy   | Ctrl-C",
 		"Paste  | Ctrl-V",
@@ -126,9 +124,6 @@ void Initwin()
 	drawRectangle(x, 0, 10 * h, winheight - 2 * h, 0);
 	drawRectangle(10 * h, 0, winwidth - 8 * h, h, 0);
 	//将画笔颜色设置为亮灰
-	SetPenColor("Light Gray");
-	drawRectangle(10 * h, h, 8 * h, winheight - 3 * h, 1);
-	drawRectangle(winwidth - 8 * h, h, 8 * h, winheight - 3 * h, 1);
 	setMenuColors("Dark Gray", "White", "Black", "Yellow", 1);
 	drawMenuBar(0, y - h, winwidth, h);
 	//File菜单栏
@@ -171,12 +166,33 @@ void Initwin()
 	}
 	// Edit 菜单
 	selection = menuList(GenUIID(0), x + w, y - h, 2*w, 2*wlist, h, menuListEdit, sizeof(menuListEdit) / sizeof(menuListEdit[0]));
-	if (selection == 6)
+	if (selection == 4)
 	{
 		if (operate_flag == 2)
 		{
 			pop();
 			operate_flag = 0;
+		}
+	}
+	else if (selection == 1)
+	{
+		if (operate_flag == 2)
+		{
+			cut();
+		}
+	}
+	else if (selection == 2)
+	{
+		if (operate_flag == 2)
+		{
+			copy();
+		}
+	}
+	else if (selection == 3)
+	{
+		if (operate_flag == 2)
+		{
+			paste();
 		}
 	}
 	//Draw 菜单
@@ -312,22 +328,22 @@ void Initwin()
 			{
 			case 4:
 			{
-				selected_line->pensize = selection;
+				((myline*)select_ptr)->pensize = selection;
 				break;
 			}
 			case 5:
 			{
-				selected_directionalconnection->pensize = selection;
+				((mydirectionalconnection*)select_ptr)->pensize = selection;
 				break;
 			}
 			case 6:
 			{
-				selected_bidirectionalconnection->pensize = selection;
+				((mybidirectionalconnection*)select_ptr)->pensize = selection;
 				break;
 			}
 			case 7:
 			{
-				selected_dashline->pensize = selection;
+				((mydashline*)select_ptr)->pensize = selection;
 				break;
 			}
 			}
@@ -344,12 +360,12 @@ void Initwin()
 			{
 			case 5:
 			{
-				selected_directionalconnection->arrow_style = arrow_style;
+				((mydirectionalconnection*)select_ptr)->arrow_style = arrow_style;
 				break;
 			}
 			case 6:
 			{
-				selected_bidirectionalconnection->arrow_style = arrow_style;
+				((mybidirectionalconnection*)select_ptr)->arrow_style = arrow_style;
 				break;
 			}
 			}
@@ -402,14 +418,24 @@ void InitButton()
 	if (button(GenUIID(0), 15 * h, y - 2 * h, 4 * h, h, "Cut"))
 	{
 		//cut操作
+		if (operate_flag == 2)
+		{
+			cut();
+		}
 	}
 	if (button(GenUIID(0), 19 * h, y - 2 * h, 4 * h, h, "Copy"))
 	{
-		//拷贝操作
+		if (operate_flag == 2)
+		{
+			copy();
+		}
 	}
 	if (button(GenUIID(0), 23 * h, y - 2 * h, 4 * h, h, "Paste"))
 	{
-		//whether use grid lines
+		if (copy_ptr != NULL)
+		{
+			paste();
+		}
 	}
 	setButtonColors("Light Gray", "Black", "Dark Gray", "Black", 0);
 	if (button(GenUIID(0), 0, y - 4 * h, 10 * h, 2 * h, "Rectangle"))
@@ -507,12 +533,12 @@ void InitButton()
 			}
 		}
 	}
-	/*if (music_flag == 0)
+	if (music_flag == 0)
 	{
 		if (button(GenUIID(0), 14 * h, 0, 4 * h, h, "Silent"))
 		{
 			music_flag = 1;
-			mciSendString("play bkmusic repeat", NULL, 0, NULL);
+			mciSendString("play a repeat", NULL, 0, NULL);
 		}
 		
 	}
@@ -521,10 +547,9 @@ void InitButton()
 		if (button(GenUIID(0), 14 * h, 0, 4 * h, h, "Music on"))
 		{
 			music_flag = 0;
-			mciSendString("stop bkmusic repeat", NULL, 0, NULL);
+			mciSendString("stop a", NULL, 0, NULL);
 		}
 	}
-	*/
 		//下方绘制状态栏
 	if (operate_flag == 0)
 		drawLabel(winwidth - 6 * h, 0.25 * h, "No operation");
@@ -548,38 +573,40 @@ void InitButton()
 			{
 			case 1:
 			{
-				strcpy(selected_rect->text, mytext);
+				strcpy(((myrect*)select_ptr)->text, mytext);
 				break;
 			}
 			case 2:
 			{
-				strcpy(selected_roundrect->text, mytext);
+				strcpy(((myroundrect*)select_ptr)->text, mytext);
 				break;
 			}
 			case 3:
 			{
-				strcpy(selected_diamond->text, mytext);
+				strcpy(((mydiamond*)select_ptr)->text, mytext);
 				break;
 			}
 			case 8:
 			{
-				strcpy(selected_process->text, mytext);
+				strcpy(((myprocess*)select_ptr)->text, mytext);
 				break;
 			}
 			case 9:
 			{
-				strcpy(selected_circle->text, mytext);
+				strcpy(((mycircle*)select_ptr)->text, mytext);
 				break;
 			}
 			case 10:
 			{
-				strcpy(selected_oval->text, mytext);
+				strcpy(((myoval*)select_ptr)->text, mytext);
 				break;
 			}
 			}
 		}
 	}
-
+	SetPenColor("Light Gray");
+	drawRectangle(10 * h, h, 8 * h, winheight - 3 * h, 1);
+	drawRectangle(winwidth - 8 * h, h, 8 * h, winheight - 3 * h, 1);
 }
 
 
@@ -590,14 +617,55 @@ void drawRoundrec(double x, double y, double w, double h, int fillflag)
 	MovePen(x, y);
 	if( fillflag ) StartFilledRegion(1); 
 	{
-		DrawLine(w, 0);
-		DrawEllipticalArc(w/6,h/6, 270, 90);
-		DrawLine(0, h);
-		DrawEllipticalArc(w/6,h/6, 0, 90);
-		DrawLine(-w, 0);
-		DrawEllipticalArc(w/6,h/6, 90, 90);
-		DrawLine(0, -h);
-		DrawEllipticalArc(w/6,h/6, 180, 90);
+		if (h > 0 && w > 0)  //右上 
+		{
+			MovePen(x, y);
+			DrawLine(w, 0);
+			DrawEllipticalArc(w / 6, h / 6, 270, 90);
+			DrawLine(0, h);
+			DrawEllipticalArc(w / 6, h/ 6, 0, 90);
+			DrawLine(-w, 0);
+			DrawEllipticalArc(w / 6, h / 6, 90, 90);
+			DrawLine(0, -h);
+			DrawEllipticalArc(w / 6, h / 6, 180, 90);
+		}
+		else if (h < 0 && w < 0)  //左下 
+		{
+			MovePen(x, y);
+			DrawLine(w, 0);
+			DrawEllipticalArc(-w / 6, -h / 6, 90, 90);
+			DrawLine(0, h);
+			DrawEllipticalArc(-w / 6, -h / 6, 180, 90);
+			DrawLine(-w, 0);
+			DrawEllipticalArc(-w / 6, -h / 6, 270, 90);
+			DrawLine(0, -h);
+			DrawEllipticalArc(-w / 6, -h / 6, 0, 90);
+		}
+		else if (h > 0 && w < 0) //左上
+		{
+			MovePen(x, y);
+			DrawLine(w, 0);
+			DrawEllipticalArc(-w / 6, h / 6, 270, -90);
+			DrawLine(0, h);
+			DrawEllipticalArc(-w / 6, h / 6, 180, -90);
+			DrawLine(-w, 0);
+			DrawEllipticalArc(-w / 6, h / 6, 90, -90);
+			DrawLine(0, -h);
+			DrawEllipticalArc(-w / 6, h / 6, 0, -90);
+		}
+		else if (h < 0 && w>0)   //右下
+		{
+			MovePen(x, y);
+			DrawLine(w, 0);
+			DrawEllipticalArc(w / 6, -h / 6, 90, -90);
+			DrawLine(0, h);
+			DrawEllipticalArc(w / 6, -h / 6, 0, -90);
+			DrawLine(-w, 0);
+			DrawEllipticalArc(w / 6, -h / 6, 270, -90);
+			DrawLine(0, -h);
+			DrawEllipticalArc(w / 6, -h / 6, 180, -90);
+		}
+
 	}
 	if( fillflag ) EndFilledRegion();
 }
@@ -862,8 +930,17 @@ void MouseEventProcess(int x, int y, int button, int event)
 		{
 			if (button == RIGHT_BUTTON)
 			{										
-				if(operate_flag!=0)
+				if (operate_flag == 1)
+				{
+					select_what = draw_what;
+					select_ptr = draw_ptr;
+					pop();
 					operate_flag = 0;
+				}
+				else
+				{
+					operate_flag = 0;
+				}
 			}
 			else if (button == LEFT_BUTTON)
 			{
@@ -874,15 +951,14 @@ void MouseEventProcess(int x, int y, int button, int event)
 						if (click_count == 0)				//当此时是取第一个点时，mx,my为左上点
 						{
 							click_count = 1;
-							x_1 = mx;
-							y_1 = my;
+							draw(mx,my);
 						}
 						else
 						{
 							click_count = 2;
 							x_2 = mx;
 							y_2 = my;
-							draw();
+							
 							display();
 							click_count = 0;
 							operate_flag = 0;
@@ -933,6 +1009,10 @@ void MouseEventProcess(int x, int y, int button, int event)
 				y_1 = my;
 				x_1 = mx;
 			}
+			else if (operate_flag == 1 && click_count == 1)
+			{
+				drawing(mx, my);
+			}
 			break;
 		}
 		case ROLL_UP:
@@ -959,10 +1039,12 @@ void MouseEventProcess(int x, int y, int button, int event)
 // 用户的计时器时间响应函数
 void TimerEventProcess(int timerID)
 {
-	if (2019 == timerID)
+	if (save_flag == 1 && timerID % 100000 == 0)
 	{
-		display();
+		save_flag == 0;
 	}
+	display();
+
 }
 void drawlinklist1()//n 张linklist中储存着各个图元、每次display都会将所有链表中的图元输出
 {
@@ -1103,11 +1185,12 @@ int  select_graphic(double mx,double my)
 	myrect* p = rect_head->next;
 	while (p != NULL)
 	{
-		if (mx >= p->x && mx <= (p->x + p->width) && my >= p->y && my <= (p->y + p->height))
+		if ((mx-p->x)*(mx-p->x-p->width)<=0&& (my - p->y) * (my - p->y - p->height)<=0)
 		{
 			operate_flag = 2;
-			selected_rect = p;
+			select_ptr = p;
 			select_what = 1;
+			strcpy(mytext, p->text);
 			return 1;
 		}
 		p = p->next;
@@ -1115,11 +1198,12 @@ int  select_graphic(double mx,double my)
 	myroundrect* q = roundrect_head->next;
 	while (q != NULL)
 	{
-		if (mx >= q->x && mx <= (q->x + q->width) && my >= q->y && my <= (q->y + q->height))
+		if ((mx - q->x) * (mx - q->x - q->width) <= 0 && (my - q->y) * (my - q->y - q->height) <= 0)
 		{
 			operate_flag = 2;
-			selected_roundrect = q;
+			select_ptr = q;
 			select_what = 2;
+			strcpy(mytext, q->text);
 			return 1;
 		}
 		q = q->next;
@@ -1129,9 +1213,11 @@ int  select_graphic(double mx,double my)
 	{
 		if ((my>=(o->dy*(mx-o->x1)/o->dx+o->y1-0.1))&& (my <= (o->dy * (mx - o->x1) / o->dx + o->y1 + 0.1)))
 		{
+
 			operate_flag = 2;
-			selected_line= o;
+			select_ptr = o;
 			select_what = 4;
+			strcpy(mytext, "");
 			return 1;
 		}
 		o = o->next;
@@ -1139,11 +1225,12 @@ int  select_graphic(double mx,double my)
 	mydiamond* s = diamond_head->next;
 	while (s != NULL)
 	{
-		if (mx >= s->x && mx <= (s->x + s->width) && my >= s->y && my <= (s->y + s->height))
+		if ((mx - s->x) * (mx - s->x - s->width) <= 0 && (my - s->y) * (my - s->y - s->height) <= 0)
 		{
 			operate_flag = 2;
-			selected_diamond = s;
+			select_ptr = s;
 			select_what = 3;
+			strcpy(mytext, s->text);
 			return 1;
 		}
 		s = s->next;
@@ -1155,8 +1242,9 @@ int  select_graphic(double mx,double my)
 		if ((my >= (t->dy * (mx - t->x) / t->dx + t->y - 0.1)) && (my <= (t->dy * (mx - t->x) / t->dx + t->y + 0.1)))
 		{
 			operate_flag = 2;
-			selected_directionalconnection = t;
+			select_ptr = t;
 			select_what = 5;
+			strcpy(mytext, "");
 			return 1;
 		}
 		t = t->next;
@@ -1168,8 +1256,9 @@ int  select_graphic(double mx,double my)
 		if ((my >= (u->dy * (mx - u->x) / u->dx + u->y - 0.1)) && (my <= (u->dy * (mx - u->x) / u->dx + u->y + 0.1)))
 		{
 			operate_flag = 2;
-			selected_bidirectionalconnection = u;
+			select_ptr = u;
 			select_what = 6;
+			strcpy(mytext, "");
 			return 1;
 		}
 		u = u->next;
@@ -1178,11 +1267,12 @@ int  select_graphic(double mx,double my)
 	myprocess* v = process_head->next;
 	while (v != NULL)
 	{
-		if (mx >= v->x && mx <= (v->x + v->width) && my >= v->y && my <= (v->y + v->height))
+		if ((mx - v->x) * (mx - v->x - v->width) <= 0 && (my - v->y) * (my - v->y - v->height) <= 0)
 		{
 			operate_flag = 2;
-			selected_process = v;
-			select_what = 8;
+			select_ptr = v;
+			select_what = 8; 
+			strcpy(mytext, v->text);
 			return 1;
 		}
 		v = v->next;
@@ -1193,8 +1283,9 @@ int  select_graphic(double mx,double my)
 		if ((my >= (w->dy * (mx - w->x1) / w->dx + w->y1 - 0.1)) && (my <= (w->dy * (mx - w->x1) / w->dx + w->y1 + 0.1)))
 		{
 			operate_flag = 2;
-			selected_dashline = w;
+			select_ptr = w;
 			select_what = 7;
+			strcpy(mytext, "");
 			return 1;
 		}
 		w = w->next;
@@ -1206,8 +1297,9 @@ int  select_graphic(double mx,double my)
 		if (distance <= x->r)
 		{
 			operate_flag = 2;
-			selected_circle = x;
+			select_ptr = x;
 			select_what = 9;
+			strcpy(mytext, x->text);
 			return 1;
 		}
 		x = x->next;
@@ -1218,8 +1310,9 @@ int  select_graphic(double mx,double my)
 		if ((pow(mx-y->x-y->rx,2)/pow(y->rx,2) + pow(my-y->y-y->ry,2)/pow(y->ry,2))<= 1)
 		{
 			operate_flag = 2;
-			selected_oval = y;
+			select_ptr = y;
 			select_what = 10;
+			strcpy(mytext, y->text);
 			return 1;
 		}
 		y = y->next;

@@ -169,7 +169,9 @@ void pushoval(myoval* source);
 
 int  open();
 int  save();
-
+void copy();
+void paste();
+void cut();
 //1-9分别是矩形、圆角矩形，详见draw.h的说明 
 void Initlinklist1();
 void Initlinklist2();

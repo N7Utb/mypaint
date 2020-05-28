@@ -8,14 +8,14 @@
 	{
 	case 1:
 	{
-		selected_rect->x += x;
-		selected_rect->y += y;
+		((myrect*)select_ptr)->x += x;
+		((myrect*)select_ptr)->y += y;
 		break;
 	}
 	case 2:
 	{
-		selected_roundrect->x += x;
-		selected_roundrect->y += y;
+		((myroundrect*)select_ptr)->x += x;
+		((myroundrect*)select_ptr)->y += y;
 		break;
 	}
 	}
@@ -29,25 +29,25 @@ void upper()
 	case 1:
 	{
 		double Ratio_of_length_to_width;
-		Ratio_of_length_to_width = selected_rect->height / selected_rect->width;
-		if (selected_rect->height >= (winheight - 3 * h) || selected_rect->width >= (winwidth - 30 * h))
+		Ratio_of_length_to_width = ((myrect*)select_ptr)->height / ((myrect*)select_ptr)->width;
+		if (((myrect*)select_ptr)->height >= (winheight - 3 * h) || ((myrect*)select_ptr)->width >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		selected_rect->height += Ratio_of_length_to_width * 0.1;
-		selected_rect->width += 0.1;
+		((myrect*)select_ptr)->height += Ratio_of_length_to_width * 0.1;
+		((myrect*)select_ptr)->width += 0.1;
 		break;
 	}
 	case 2:
 	{
 		double Ratio_of_length_to_width;
-		Ratio_of_length_to_width = selected_roundrect->height / selected_roundrect->width;
-		if (selected_roundrect->height >= (winheight - 3 * h) || selected_roundrect->width >= (winwidth - 30 * h))
+		Ratio_of_length_to_width = ((myroundrect*)select_ptr)->height / ((myroundrect*)select_ptr)->width;
+		if (((myroundrect*)select_ptr)->height >= (winheight - 3 * h) || ((myroundrect*)select_ptr)->width >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		selected_roundrect->height += Ratio_of_length_to_width * 0.1;
-		selected_roundrect->width += 0.1;
+		((myroundrect*)select_ptr)->height += Ratio_of_length_to_width * 0.1;
+		((myroundrect*)select_ptr)->width += 0.1;
 		break;
 	}
 	}
@@ -59,25 +59,25 @@ void downer()
 	case 1:
 	{
 		double Ratio_of_length_to_width;
-		Ratio_of_length_to_width = selected_rect->height / selected_rect->width;
-		if (selected_rect->height >= (winheight - 3 * h) || selected_rect->width >= (winwidth - 30 * h))
+		Ratio_of_length_to_width = ((myrect*)select_ptr)->height / ((myrect*)select_ptr)->width;
+		if (((myrect*)select_ptr)->height >= (winheight - 3 * h) || ((myrect*)select_ptr)->width >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		selected_rect->height -= Ratio_of_length_to_width * 0.1;
-		selected_rect->width -= 0.1;
+		((myrect*)select_ptr)->height -= Ratio_of_length_to_width * 0.1;
+		((myrect*)select_ptr)->width -= 0.1;
 		break;
 	}
 	case 2:
 	{
 		double Ratio_of_length_to_width;
-		Ratio_of_length_to_width = selected_roundrect->height / selected_roundrect->width;
-		if (selected_roundrect->height >= (winheight - 3 * h) || selected_roundrect->width >= (winwidth - 30 * h))
+		Ratio_of_length_to_width = ((myroundrect*)select_ptr)->height / ((myroundrect*)select_ptr)->width;
+		if (((myroundrect*)select_ptr)->height >= (winheight - 3 * h) || ((myroundrect*)select_ptr)->width >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		selected_roundrect->height -= Ratio_of_length_to_width * 0.1;
-		selected_roundrect->width -= 0.1;
+		((myroundrect*)select_ptr)->height -= Ratio_of_length_to_width * 0.1;
+		((myroundrect*)select_ptr)->width -= 0.1;
 		break;
 	}
 	}
@@ -95,62 +95,62 @@ void move(double x, double y)
 	{
 	case 1:
 	{
-		selected_rect->x += x;
-		selected_rect->y += y;
+		((myrect*)select_ptr)->x += x;
+		((myrect*)select_ptr)->y += y;
 		break;
 	}
 	case 2:
 	{
-		selected_roundrect->x += x;
-		selected_roundrect->y += y;
+		((myroundrect*)select_ptr)->x += x;
+		((myroundrect*)select_ptr)->y += y;
 		break;
 	}
 	case 3:
 	{
-		selected_diamond->x += x;
-		selected_diamond->y += y;
+		((mydiamond*)select_ptr)->x += x;
+		((mydiamond*)select_ptr)->y += y;
 		break;
 	}
 	case 4:
 	{
-		selected_line->x1 += x;
-		selected_line->y1 += y;
+		((myline*)select_ptr)->x1 += x;
+		((myline*)select_ptr)->y1 += y;
 		break;
 	}
 	case 5:
 	{
-		selected_directionalconnection->x += x;
-		selected_directionalconnection->y += y;
+		((mydirectionalconnection*)select_ptr)->x += x;
+		((mydirectionalconnection*)select_ptr)->y += y;
 		break;
 	}
 	case 6:
 	{
-		selected_bidirectionalconnection->x += x;
-		selected_bidirectionalconnection->y += y;
+		((mybidirectionalconnection*)select_ptr)->x += x;
+		((mybidirectionalconnection*)select_ptr)->y += y;
 		break;
 	}
 	case 7:
 	{
-		selected_dashline->x1 += x;
-		selected_dashline->y1 += y;
+		((mydashline*)select_ptr)->x1 += x;
+		((mydashline*)select_ptr)->y1 += y;
 		break;
 	}
 	case 8:
 	{
-		selected_process->x += x;
-		selected_process->y += y;
+		((myprocess*)select_ptr)->x += x;
+		((myprocess*)select_ptr)->y += y;
 		break;
 	}
 	case 9:
 	{
-		selected_circle->x += x;
-		selected_circle->y += y;
+		((mycircle*)select_ptr)->x += x;
+		((mycircle*)select_ptr)->y += y;
 		break;
 	}
 	case 10:
 	{
-		selected_oval->x += x;
-		selected_oval->y += y;
+		((myoval*)select_ptr)->x += x;
+		((myoval*)select_ptr)->y += y;
 		break;
 	}
 
@@ -165,107 +165,107 @@ void upper()
 	case 1:
 	{
 		double Ratio_of_length_to_width;
-		Ratio_of_length_to_width = selected_rect->height / selected_rect->width;
-		if (selected_rect->height >= (winheight - 3 * h) || selected_rect->width >= (winwidth - 30 * h))
+		Ratio_of_length_to_width = ((myrect*)select_ptr)->height / ((myrect*)select_ptr)->width;
+		if (((myrect*)select_ptr)->height >= (winheight - 3 * h) || ((myrect*)select_ptr)->width >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		selected_rect->height += Ratio_of_length_to_width * 0.1;
-		selected_rect->width += 0.1;
+		((myrect*)select_ptr)->height += Ratio_of_length_to_width * 0.1;
+		((myrect*)select_ptr)->width += 0.1;
 		break;
 	}
 	case 2:
 	{
 		double Ratio_of_length_to_width;
-		Ratio_of_length_to_width = selected_roundrect->height / selected_roundrect->width;
-		if (selected_roundrect->height >= (winheight - 3 * h) || selected_roundrect->width >= (winwidth - 30 * h))
+		Ratio_of_length_to_width = ((myroundrect*)select_ptr)->height / ((myroundrect*)select_ptr)->width;
+		if (((myroundrect*)select_ptr)->height >= (winheight - 3 * h) || ((myroundrect*)select_ptr)->width >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		selected_roundrect->height += Ratio_of_length_to_width * 0.1;
-		selected_roundrect->width += 0.1;
+		((myroundrect*)select_ptr)->height += Ratio_of_length_to_width * 0.1;
+		((myroundrect*)select_ptr)->width += 0.1;
 		break;
 	}
 	case 3:
 	{
 		double Ratio_of_length_to_width;
-		Ratio_of_length_to_width = selected_diamond->height / selected_diamond->width;
-		if (selected_diamond->height >= (winheight - 3 * h) || selected_diamond->width >= (winwidth - 30 * h))
+		Ratio_of_length_to_width = ((mydiamond*)select_ptr)->height / ((mydiamond*)select_ptr)->width;
+		if (((mydiamond*)select_ptr)->height >= (winheight - 3 * h) || ((mydiamond*)select_ptr)->width >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		selected_diamond->height += Ratio_of_length_to_width * 0.1;
-		selected_diamond->width += 0.1;
+		((mydiamond*)select_ptr)->height += Ratio_of_length_to_width * 0.1;
+		((mydiamond*)select_ptr)->width += 0.1;
 		break;
 	}
 
 	case 4:
 	{
 		double Ratio_of_dy_to_dx;
-		Ratio_of_dy_to_dx = selected_line->dy / selected_line->dx;
-		double ddx = fabs(selected_line->dx);
-		double ddy = fabs(selected_line->dy);
+		Ratio_of_dy_to_dx = ((myline*)select_ptr)->dy / ((myline*)select_ptr)->dx;
+		double ddx = fabs(((myline*)select_ptr)->dx);
+		double ddy = fabs(((myline*)select_ptr)->dy);
 
 		if (ddy >= (winheight - 3 * h) || ddx >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		/*if (selected_line->dy > 0)  selected_line->dy += 0.1;
-		else if (selected_line->dy < 0)  selected_line->dy -=  0.1;
+		/*if (((myline*)select_ptr)->dy > 0)  ((myline*)select_ptr)->dy += 0.1;
+		else if (((myline*)select_ptr)->dy < 0)  ((myline*)select_ptr)->dy -=  0.1;
 		else;
 
-		if (selected_line->dx > 0)        selected_line->dx +=  Ratio_of_dy_to_dx *0.1;
-		else if (selected_line->dx < 0)   selected_line->dx -= Ratio_of_dy_to_dx *0.1;
+		if (((myline*)select_ptr)->dx > 0)        ((myline*)select_ptr)->dx +=  Ratio_of_dy_to_dx *0.1;
+		else if (((myline*)select_ptr)->dx < 0)   ((myline*)select_ptr)->dx -= Ratio_of_dy_to_dx *0.1;
 		else;
 		*/
-		selected_line->dy += Ratio_of_dy_to_dx *0.1;
-		selected_line->dx +=  0.1;
+		((myline*)select_ptr)->dy += Ratio_of_dy_to_dx *0.1;
+		((myline*)select_ptr)->dx +=  0.1;
 		break;
 	}
 
 	case 5:
 	{
 		double Ratio_of_length_to_width;
-		Ratio_of_length_to_width = selected_directionalconnection->dy / selected_directionalconnection->dx;
-		if (selected_directionalconnection->dy >= (winheight - 3 * h) || selected_directionalconnection->dx >= (winwidth - 30 * h))
+		Ratio_of_length_to_width = ((mydirectionalconnection*)select_ptr)->dy / ((mydirectionalconnection*)select_ptr)->dx;
+		if (((mydirectionalconnection*)select_ptr)->dy >= (winheight - 3 * h) || ((mydirectionalconnection*)select_ptr)->dx >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		selected_directionalconnection->dy += Ratio_of_length_to_width * 0.1;
-		selected_directionalconnection->dx += 0.1;
+		((mydirectionalconnection*)select_ptr)->dy += Ratio_of_length_to_width * 0.1;
+		((mydirectionalconnection*)select_ptr)->dx += 0.1;
 		break;
 	}
 
 	case 6:
 	{
 		double Ratio_of_length_to_width;
-		Ratio_of_length_to_width = selected_bidirectionalconnection->dy / selected_bidirectionalconnection->dx;
-		if (selected_bidirectionalconnection->dy >= (winheight - 3 * h) || selected_bidirectionalconnection->dx >= (winwidth - 30 * h))
+		Ratio_of_length_to_width = ((mybidirectionalconnection*)select_ptr)->dy / ((mybidirectionalconnection*)select_ptr)->dx;
+		if (((mybidirectionalconnection*)select_ptr)->dy >= (winheight - 3 * h) || ((mybidirectionalconnection*)select_ptr)->dx >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		selected_bidirectionalconnection->dy += Ratio_of_length_to_width * 0.1;
-		selected_bidirectionalconnection->dx += 0.1;
+		((mybidirectionalconnection*)select_ptr)->dy += Ratio_of_length_to_width * 0.1;
+		((mybidirectionalconnection*)select_ptr)->dx += 0.1;
 		break;
 	}
 	
 	case 7:
 	{
 		double Ratio_of_dy_to_dx;
-		Ratio_of_dy_to_dx = selected_dashline->dy / selected_dashline->dx;
-		double ddx = fabs(selected_dashline->dx);
-		double ddy = fabs(selected_dashline->dy);
+		Ratio_of_dy_to_dx = ((mydashline*)select_ptr)->dy / ((mydashline*)select_ptr)->dx;
+		double ddx = fabs(((mydashline*)select_ptr)->dx);
+		double ddy = fabs(((mydashline*)select_ptr)->dy);
 
 		if (ddy >= (winheight - 3 * h) || ddx >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		if (selected_dashline->dy > 0)  selected_dashline->dy += Ratio_of_dy_to_dx * 0.1;
-		else if (selected_dashline->dy < 0)  selected_dashline->dy -= Ratio_of_dy_to_dx * 0.1;
+		if (((mydashline*)select_ptr)->dy > 0)  ((mydashline*)select_ptr)->dy += Ratio_of_dy_to_dx * 0.1;
+		else if (((mydashline*)select_ptr)->dy < 0)  ((mydashline*)select_ptr)->dy -= Ratio_of_dy_to_dx * 0.1;
 		else;
 
-		if (selected_dashline->dx > 0)        selected_dashline->dx += 0.1;
-		else if (selected_dashline->dx < 0)   selected_dashline->dx -= 0.1;
+		if (((mydashline*)select_ptr)->dx > 0)        ((mydashline*)select_ptr)->dx += 0.1;
+		else if (((mydashline*)select_ptr)->dx < 0)   ((mydashline*)select_ptr)->dx -= 0.1;
 		else;
 
 		break;
@@ -274,37 +274,37 @@ void upper()
 	case 8:
 	{
 		double Ratio_of_length_to_width;
-		Ratio_of_length_to_width = selected_process->height / selected_process->width;
-		if (selected_process->height >= (winheight - 3 * h) || selected_process->width >= (winwidth - 30 * h))
+		Ratio_of_length_to_width = ((myprocess*)select_ptr)->height / ((myprocess*)select_ptr)->width;
+		if (((myprocess*)select_ptr)->height >= (winheight - 3 * h) || ((myprocess*)select_ptr)->width >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		selected_process->height += Ratio_of_length_to_width * 0.1;
-		selected_process->width += 0.1;
+		((myprocess*)select_ptr)->height += Ratio_of_length_to_width * 0.1;
+		((myprocess*)select_ptr)->width += 0.1;
 		break;
 	}
 	case 9:
 	{
 
-		if (selected_circle->r >= 0.5 * (winheight - 3 * h))
+		if (((mycircle*)select_ptr)->r >= 0.5 * (winheight - 3 * h))
 		{
 			return;
 		}
 
-		selected_circle->r += 0.05;
+		((mycircle*)select_ptr)->r += 0.05;
 		break;
 	}
 
 	case 10:
 	{
 		double Ratio_of_ry_to_rx;
-		Ratio_of_ry_to_rx = selected_oval->ry / selected_oval->rx;
-		if (selected_oval->ry >= 0.5 * (winheight - 3 * h) || selected_oval->rx >= 0.5 * (winwidth - 30 * h))
+		Ratio_of_ry_to_rx = ((myoval*)select_ptr)->ry / ((myoval*)select_ptr)->rx;
+		if (((myoval*)select_ptr)->ry >= 0.5 * (winheight - 3 * h) || ((myoval*)select_ptr)->rx >= 0.5 * (winwidth - 30 * h))
 		{
 			return;
 		}
-		selected_oval->ry += Ratio_of_ry_to_rx * 0.05;
-		selected_oval->rx += 0.05;
+		((myoval*)select_ptr)->ry += Ratio_of_ry_to_rx * 0.05;
+		((myoval*)select_ptr)->rx += 0.05;
 		break;
 	}
 
@@ -317,95 +317,95 @@ void downer()
 	case 1:
 	{
 		double Ratio_of_length_to_width;
-		Ratio_of_length_to_width = selected_rect->height / selected_rect->width;
-		if (selected_rect->height >= (winheight - 3 * h) || selected_rect->width >= (winwidth - 30 * h))
+		Ratio_of_length_to_width = ((myrect*)select_ptr)->height / ((myrect*)select_ptr)->width;
+		if (((myrect*)select_ptr)->height >= (winheight - 3 * h) || ((myrect*)select_ptr)->width >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		selected_rect->height -= Ratio_of_length_to_width * 0.1;
-		selected_rect->width -= 0.1;
+		((myrect*)select_ptr)->height -= Ratio_of_length_to_width * 0.1;
+		((myrect*)select_ptr)->width -= 0.1;
 		break;
 	}
 	case 2:
 	{
 		double Ratio_of_length_to_width;
-		Ratio_of_length_to_width = selected_roundrect->height / selected_roundrect->width;
-		if (selected_roundrect->height >= (winheight - 3 * h) || selected_roundrect->width >= (winwidth - 30 * h))
+		Ratio_of_length_to_width = ((myroundrect*)select_ptr)->height / ((myroundrect*)select_ptr)->width;
+		if (((myroundrect*)select_ptr)->height >= (winheight - 3 * h) || ((myroundrect*)select_ptr)->width >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		selected_roundrect->height -= Ratio_of_length_to_width * 0.1;
-		selected_roundrect->width -= 0.1;
+		((myroundrect*)select_ptr)->height -= Ratio_of_length_to_width * 0.1;
+		((myroundrect*)select_ptr)->width -= 0.1;
 		break;
 	}
 
 	case 3:
 	{
 		double Ratio_of_length_to_width;
-		Ratio_of_length_to_width = selected_diamond->height / selected_diamond->width;
-		if (selected_diamond->height >= (winheight - 3 * h) || selected_diamond->width >= (winwidth - 30 * h))
+		Ratio_of_length_to_width = ((mydiamond*)select_ptr)->height / ((mydiamond*)select_ptr)->width;
+		if (((mydiamond*)select_ptr)->height >= (winheight - 3 * h) || ((mydiamond*)select_ptr)->width >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		selected_diamond->height -= Ratio_of_length_to_width * 0.1;
-		selected_diamond->width -= 0.1;
+		((mydiamond*)select_ptr)->height -= Ratio_of_length_to_width * 0.1;
+		((mydiamond*)select_ptr)->width -= 0.1;
 		break;
 	}
 
 	case 4:
 	{
 		double Ratio_of_dy_to_dx;
-		Ratio_of_dy_to_dx = selected_line->dy / selected_line->dx;
-		double ddx = fabs(selected_line->dx);
-		double ddy = fabs(selected_line->dy);
+		Ratio_of_dy_to_dx = ((myline*)select_ptr)->dy / ((myline*)select_ptr)->dx;
+		double ddx = fabs(((myline*)select_ptr)->dx);
+		double ddy = fabs(((myline*)select_ptr)->dy);
 
-		selected_line->dy -= Ratio_of_dy_to_dx * 0.1;
-		selected_line->dx -= 0.1;
+		((myline*)select_ptr)->dy -= Ratio_of_dy_to_dx * 0.1;
+		((myline*)select_ptr)->dx -= 0.1;
 		break;
 	}
 
 	case 5:
 	{
 		double Ratio_of_length_to_width;
-		Ratio_of_length_to_width = selected_directionalconnection->dy / selected_directionalconnection->dx;
-		if (selected_directionalconnection->dy >= (winheight - 3 * h) || selected_directionalconnection->dx >= (winwidth - 30 * h))
+		Ratio_of_length_to_width = ((mydirectionalconnection*)select_ptr)->dy / ((mydirectionalconnection*)select_ptr)->dx;
+		if (((mydirectionalconnection*)select_ptr)->dy >= (winheight - 3 * h) || ((mydirectionalconnection*)select_ptr)->dx >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		selected_directionalconnection->dy -= Ratio_of_length_to_width * 0.1;
-		selected_directionalconnection->dx -= 0.1;
+		((mydirectionalconnection*)select_ptr)->dy -= Ratio_of_length_to_width * 0.1;
+		((mydirectionalconnection*)select_ptr)->dx -= 0.1;
 		break;
 	}
 
 	case 6:
 	{
 		double Ratio_of_length_to_width;
-		Ratio_of_length_to_width = selected_bidirectionalconnection->dy / selected_bidirectionalconnection->dx;
-		if (selected_bidirectionalconnection->dy >= (winheight - 3 * h) || selected_bidirectionalconnection->dx >= (winwidth - 30 * h))
+		Ratio_of_length_to_width = ((mybidirectionalconnection*)select_ptr)->dy / ((mybidirectionalconnection*)select_ptr)->dx;
+		if (((mybidirectionalconnection*)select_ptr)->dy >= (winheight - 3 * h) || ((mybidirectionalconnection*)select_ptr)->dx >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		selected_bidirectionalconnection->dy -= Ratio_of_length_to_width * 0.1;
-		selected_bidirectionalconnection->dx -= 0.1;
+		((mybidirectionalconnection*)select_ptr)->dy -= Ratio_of_length_to_width * 0.1;
+		((mybidirectionalconnection*)select_ptr)->dx -= 0.1;
 		break;
 	}
 	case 7:
 	{
 		double Ratio_of_dy_to_dx;
-		Ratio_of_dy_to_dx = selected_dashline->dy / selected_dashline->dx;
-		double ddx = fabs(selected_dashline->dx);
-		double ddy = fabs(selected_dashline->dy);
+		Ratio_of_dy_to_dx = ((mydashline*)select_ptr)->dy / ((mydashline*)select_ptr)->dx;
+		double ddx = fabs(((mydashline*)select_ptr)->dx);
+		double ddy = fabs(((mydashline*)select_ptr)->dy);
 
 		if (ddy >= (winheight - 3 * h) || ddx >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		if (selected_dashline->dy > 0)  selected_dashline->dy -= Ratio_of_dy_to_dx * 0.1;
-		else if (selected_dashline->dy < 0)  selected_dashline->dy += Ratio_of_dy_to_dx * 0.1;
+		if (((mydashline*)select_ptr)->dy > 0)  ((mydashline*)select_ptr)->dy -= Ratio_of_dy_to_dx * 0.1;
+		else if (((mydashline*)select_ptr)->dy < 0)  ((mydashline*)select_ptr)->dy += Ratio_of_dy_to_dx * 0.1;
 		else;
 
-		if (selected_dashline->dx > 0)        selected_dashline->dx -= 0.1;
-		else if (selected_dashline->dx < 0)   selected_dashline->dx += 0.1;
+		if (((mydashline*)select_ptr)->dx > 0)        ((mydashline*)select_ptr)->dx -= 0.1;
+		else if (((mydashline*)select_ptr)->dx < 0)   ((mydashline*)select_ptr)->dx += 0.1;
 		else;
 
 		break;
@@ -414,37 +414,37 @@ void downer()
 	case 8:
 	{
 		double Ratio_of_length_to_width;
-		Ratio_of_length_to_width = selected_process->height / selected_process->width;
-		if (selected_process->height >= (winheight - 3 * h) || selected_process->width >= (winwidth - 30 * h))
+		Ratio_of_length_to_width = ((myprocess*)select_ptr)->height / ((myprocess*)select_ptr)->width;
+		if (((myprocess*)select_ptr)->height >= (winheight - 3 * h) || ((myprocess*)select_ptr)->width >= (winwidth - 30 * h))
 		{
 			return;
 		}
-		selected_process->height -= Ratio_of_length_to_width * 0.1;
-		selected_process->width -= 0.1;
+		((myprocess*)select_ptr)->height -= Ratio_of_length_to_width * 0.1;
+		((myprocess*)select_ptr)->width -= 0.1;
 		break;
 	}
 	case 9:
 	{
 
-		if (selected_circle->r >= 0.5 * (winheight - 3 * h))
+		if (((mycircle*)select_ptr)->r >= 0.5 * (winheight - 3 * h))
 		{
 			return;
 		}
 
-		selected_circle->r -= 0.05;
+		((mycircle*)select_ptr)->r -= 0.05;
 		break;
 	}
 
 	case 10:
 	{
 		double Ratio_of_ry_to_rx;
-		Ratio_of_ry_to_rx = selected_oval->ry / selected_oval->rx;
-		if (selected_oval->ry >= 0.5 * (winheight - 3 * h) || selected_oval->rx >= 0.5 * (winwidth - 30 * h))
+		Ratio_of_ry_to_rx = ((myoval*)select_ptr)->ry / ((myoval*)select_ptr)->rx;
+		if (((myoval*)select_ptr)->ry >= 0.5 * (winheight - 3 * h) || ((myoval*)select_ptr)->rx >= 0.5 * (winwidth - 30 * h))
 		{
 			return;
 		}
-		selected_oval->ry -= Ratio_of_ry_to_rx * 0.05;
-		selected_oval->rx -= 0.05;
+		((myoval*)select_ptr)->ry -= Ratio_of_ry_to_rx * 0.05;
+		((myoval*)select_ptr)->rx -= 0.05;
 		break;
 	}
 
@@ -457,52 +457,52 @@ void changefillcolor(int para)
 	{
 	case 1:
 	{
-		strcpy(selected_rect->fill_color, bColors[para]);
+		strcpy(((myrect*)select_ptr)->fill_color, bColors[para]);
 		break;
 	}
 	case 2:
 	{
-		strcpy(selected_roundrect->fill_color, bColors[para]);
+		strcpy(((myroundrect*)select_ptr)->fill_color, bColors[para]);
 		break;
 	}
 	case 3:
 	{
-		strcpy(selected_diamond->fill_color, bColors[para]);
+		strcpy(((mydiamond*)select_ptr)->fill_color, bColors[para]);
 		break;
 	}
 	case 4:
 	{
-		strcpy(selected_line->pencolor, bColors[para]);
+		strcpy(((myline*)select_ptr)->pencolor, bColors[para]);
 		break;
 	}
 	case 5:
 	{
-		strcpy(selected_directionalconnection->fill_color, bColors[para]);
+		strcpy(((mydirectionalconnection*)select_ptr)->fill_color, bColors[para]);
 		break;
 	}
 	case 6:
 	{
-		strcpy(selected_bidirectionalconnection->fill_color, bColors[para]);
+		strcpy(((mybidirectionalconnection*)select_ptr)->fill_color, bColors[para]);
 		break;
 	}
 	case 7:
 	{
-		strcpy(selected_dashline->pencolor, bColors[para]);
+		strcpy(((mydashline*)select_ptr)->pencolor, bColors[para]);
 		break;
 	}
 	case 8:
 	{
-		strcpy(selected_process->fill_color, bColors[para]);
+		strcpy(((myprocess*)select_ptr)->fill_color, bColors[para]);
 		break;
 	}
 	case 9:
 	{
-		strcpy(selected_circle->fill_color, bColors[para]);
+		strcpy(((mycircle*)select_ptr)->fill_color, bColors[para]);
 		break;
 	}
 	case 10:
 	{
-		strcpy(selected_oval->fill_color, bColors[para]);
+		strcpy(((myoval*)select_ptr)->fill_color, bColors[para]);
 		break;
 
 	}
@@ -515,17 +515,17 @@ void changefontcolor(int para)
 	{
 	case 1:
 	{
-		strcpy(selected_rect->front_color, bColors[para]);
+		strcpy(((myrect*)select_ptr)->front_color, bColors[para]);
 		break;
 	}
 	case 2:
 	{
-		strcpy(selected_roundrect->front_color, bColors[para]);
+		strcpy(((myroundrect*)select_ptr)->front_color, bColors[para]);
 		break;
 	}
 	case 3:
 	{
-		strcpy(selected_diamond->front_color, bColors[para]);
+		strcpy(((mydiamond*)select_ptr)->front_color, bColors[para]);
 		break;
 	}
 	case 4:
@@ -549,17 +549,17 @@ void changefontcolor(int para)
 	}
 	case 8:
 	{
-		strcpy(selected_process->front_color, bColors[para]);
+		strcpy(((myprocess*)select_ptr)->front_color, bColors[para]);
 		break;
 	}
 	case 9:
 	{
-		strcpy(selected_circle->front_color, bColors[para]);
+		strcpy(((mycircle*)select_ptr)->front_color, bColors[para]);
 		break;
 	}
 	case 10:
 	{
-		strcpy(selected_oval->front_color, bColors[para]);
+		strcpy(((myoval*)select_ptr)->front_color, bColors[para]);
 		break;
 
 	}
@@ -572,17 +572,17 @@ void changealigment(char para)
 	{
 	case 1:
 	{
-		selected_rect->alignment = para;
+		((myrect*)select_ptr)->alignment = para;
 		break;
 	}
 	case 2:
 	{
-		selected_roundrect->alignment = para;
+		((myroundrect*)select_ptr)->alignment = para;
 		break;
 	}
 	case 3:
 	{
-		selected_rect->alignment = para;
+		((myrect*)select_ptr)->alignment = para;
 		break;
 	}
 	case 4:
@@ -606,17 +606,17 @@ void changealigment(char para)
 	}
 	case 8:
 	{
-		selected_process->alignment = para;
+		((myprocess*)select_ptr)->alignment = para;
 		break;
 	}
 	case 9:
 	{
-		selected_circle->alignment = para;
+		((mycircle*)select_ptr)->alignment = para;
 		break;
 	}
 	case 10:
 	{
-		selected_oval->alignment = para;
+		((myoval*)select_ptr)->alignment = para;
 		break;
 
 	}
@@ -629,17 +629,17 @@ void changefillflag(int para)
 	{
 	case 1:
 	{
-		selected_rect->fillflag = para;
+		((myrect*)select_ptr)->fillflag = para;
 		break;
 	}
 	case 2:
 	{
-		selected_roundrect->fillflag = para;
+		((myroundrect*)select_ptr)->fillflag = para;
 		break;
 	}
 	case 3:
 	{
-		selected_diamond->fillflag = para;
+		((mydiamond*)select_ptr)->fillflag = para;
 		break;
 	}
 	case 4:
@@ -649,12 +649,12 @@ void changefillflag(int para)
 	}
 	case 5:
 	{
-		selected_directionalconnection->fillflag = para;
+		((mydirectionalconnection*)select_ptr)->fillflag = para;
 		break;
 	}
 	case 6:
 	{
-		selected_bidirectionalconnection->fillflag = para;
+		((mybidirectionalconnection*)select_ptr)->fillflag = para;
 		break;
 	}
 	case 7:
@@ -664,17 +664,17 @@ void changefillflag(int para)
 	}
 	case 8:
 	{
-		selected_process->fillflag = para;
+		((myprocess*)select_ptr)->fillflag = para;
 		break;
 	}
 	case 9:
 	{
-		selected_circle->fillflag = para;
+		((mycircle*)select_ptr)->fillflag = para;
 		break;
 	}
 	case 10:
 	{
-		selected_oval->fillflag = para;
+		((myoval*)select_ptr)->fillflag = para;
 		break;
 
 	}
