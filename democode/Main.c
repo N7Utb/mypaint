@@ -46,7 +46,7 @@ void Main()
 	registerTimerEvent(TimerEventProcess);      // 定时器
 	startTimer(1,2);
 
-	mciSendString((LPCSTR)"open SoldOut.mp3 alias a", NULL, 0, NULL);
+	mciSendString((LPCSTR)"open SoldOut.mp3 alias a", NULL, 0, NULL); //打开音乐文件 
 
 
 

@@ -75,9 +75,9 @@ void draw(double mx,double my)
 		}
 	}
 }
+//以下为十个画图形的函数定义 
 
-
-void drawrectangle(double mx,double my)  //画矩形 
+void drawrectangle(double mx,double my)	//画矩形 
 {
 		
 	myrect* a=malloc(sizeof(myrect));
@@ -106,7 +106,7 @@ void drawrectangle(double mx,double my)  //画矩形
 	pushrect(a);
 }
 
-void drawroundrec(double mx, double my)   //绘制圆角矩形 
+void drawroundrec(double mx, double my)	//绘制圆角矩形 
 {
 		
 	myroundrect* a=malloc(sizeof(myroundrect));
@@ -136,7 +136,7 @@ void drawroundrec(double mx, double my)   //绘制圆角矩形
 	
 }
 
-void drawdiamond(double mx, double my) //画菱形 
+void drawdiamond(double mx, double my)	//画菱形 
 {
 	mydiamond* a=malloc(sizeof(mydiamond));
 	if (a == NULL)
@@ -165,7 +165,7 @@ void drawdiamond(double mx, double my) //画菱形
  } 
 
 
-void drawline(double mx, double my)   //画直线 
+void drawline(double mx, double my)	//画直线 
 {
 	myline* a=malloc(sizeof(myline));
 	if (a == NULL)
@@ -185,7 +185,7 @@ void drawline(double mx, double my)   //画直线
 }
 
 
-void drawdashline(double mx, double my)   //虚线 
+void drawdashline(double mx, double my)	//画虚线 
 {
 	mydashline* a=malloc(sizeof(mydashline));
 	if (a == NULL)
@@ -204,7 +204,7 @@ void drawdashline(double mx, double my)   //虚线
 	pushdashline(a);
 }
 
-void drawdirectionalconnection(double mx, double my)
+void drawdirectionalconnection(double mx, double my)	//画单向箭头
 {
 	mydirectionalconnection* a=malloc(sizeof(mydirectionalconnection));
 	if (a == NULL)
@@ -224,7 +224,7 @@ void drawdirectionalconnection(double mx, double my)
 	draw_ptr = a;
 	pushdirectionalconnection(a); 
 }
-void  drawbiddirectionalconnection(double mx, double my)
+void  drawbiddirectionalconnection(double mx, double my)	//画双向箭头 
 {
 	mybidirectionalconnection* a = malloc(sizeof(mybidirectionalconnection));
 	if (a == NULL)
@@ -245,7 +245,7 @@ void  drawbiddirectionalconnection(double mx, double my)
 	pushbidirectionalconnection(a);
 }
  
- void drawprocess(double mx, double my)  //画process 
+ void drawprocess(double mx, double my)	//画process 
 {
 		
 	myprocess* a=malloc(sizeof(myprocess));
@@ -254,7 +254,7 @@ void  drawbiddirectionalconnection(double mx, double my)
 		exit(0);
 	}
 	a->x = mx;						//两个点中横坐标最小值为矩形左下角横坐标
-	a->y =my;						//两个点中纵坐标最小值为矩形左下角纵坐标
+	a->y = my;						//两个点中纵坐标最小值为矩形左下角纵坐标
 	a->height = 0;	//两个点的纵坐标相减的绝对值为高
 	a->width = 0;	//两个点的横坐标相减的绝对值为宽
 	//strcpy(a->text, mytext);
@@ -274,7 +274,7 @@ void  drawbiddirectionalconnection(double mx, double my)
 	pushprocess(a);
 }
 
- void drawcircle(double mx, double my)
+ void drawcircle(double mx, double my)	//画圆形 
  {
  	mycircle* a=malloc(sizeof(mycircle));
  	if(a==NULL)
@@ -301,9 +301,7 @@ void  drawbiddirectionalconnection(double mx, double my)
 	pushcircle(a);		
  }
  
- 
-
- void drawoval(double mx, double my)
+ void drawoval(double mx, double my)	//画椭圆 
  {
  	myoval* a=malloc(sizeof(myoval));
  	if(a==NULL)

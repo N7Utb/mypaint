@@ -5,21 +5,10 @@
 #include "string.h"
 #include "windows.h"
 #include "stdio.h"
-//将一个矩形压入链表
-void pushrect(myrect* source)
-{
-	myrect* p = rect_head;
-	p = rect_head;
-	while (p->next != NULL)
-	{
-		p = p->next;
-	}
-	p->next = source;
-	return;
-}
-//初始化矩形得链表
+//初始化矩形的链表
 void Initlinklist1()
 {
+	
 	myrect* p;
 	p = malloc(sizeof(myrect));
 	if (p == NULL)
@@ -32,10 +21,11 @@ void Initlinklist1()
 	rect_head = p;
 
 }
-//将一个圆角矩形压入链表
-void pushroundrect(myroundrect* source)
+//将一个矩形压入链表
+void pushrect(myrect* source)
 {
-	myroundrect* p = roundrect_head;
+	myrect* p = rect_head;
+	p = rect_head;
 	while (p->next != NULL)
 	{
 		p = p->next;
@@ -43,7 +33,7 @@ void pushroundrect(myroundrect* source)
 	p->next = source;
 	return;
 }
-//初始化圆角矩形得链表
+//初始化圆角矩形的链表
 void Initlinklist2()
 {
 	myroundrect* p;
@@ -57,10 +47,10 @@ void Initlinklist2()
 	p->next = NULL;
 	roundrect_head = p;
 }
-//将菱形压入链表
-void pushdiamond(mydiamond* source)
+//将一个圆角矩形压入链表
+void pushroundrect(myroundrect* source)
 {
-	mydiamond* p = diamond_head;
+	myroundrect* p = roundrect_head;
 	while (p->next != NULL)
 	{
 		p = p->next;
@@ -68,6 +58,7 @@ void pushdiamond(mydiamond* source)
 	p->next = source;
 	return;
 }
+//初始化菱形的链表
 void Initlinklist3()
 {
 	mydiamond* p;
@@ -82,7 +73,33 @@ void Initlinklist3()
 	diamond_head = p;
 
 }
-//将线压入链表
+//将菱形压入链表
+void pushdiamond(mydiamond* source)
+{
+	mydiamond* p = diamond_head;
+	while (p->next != NULL)
+	{
+		p = p->next;
+	}
+	p->next = source;
+	return;
+}
+//初始化直线的链表 
+void Initlinklist4()
+{
+	myline* p;
+	p = malloc(sizeof(myline));
+	if (p == NULL)
+	{
+		exit(0);
+	}
+	p->x1 = 0;
+	p->y1 = 0;
+	p->next = NULL;
+	line_head = p;
+
+}
+//将直线压入链表
 void pushline(myline* source)
 {
 	myline* p = line_head;
@@ -93,12 +110,170 @@ void pushline(myline* source)
 	p->next = source;
 	return;
 }
+//初始化单向箭头的链表 
+void Initlinklist5()
+{
+	mydirectionalconnection* p;
+	p = malloc(sizeof(mydirectionalconnection));
+	if (p == NULL)
+	{
+		exit(0);
+	}
+	p->x = 0;
+	p->y = 0;
+	p->next = NULL;
+	directionalconnection_head = p;
 
+}
+//将单向箭头压入链表 
+void pushdirectionalconnection(mydirectionalconnection* source)
+{
+	mydirectionalconnection* p = directionalconnection_head;
+	while (p->next != NULL)
+	{
+		p = p->next;
+	}
+	p->next = source;
+	return;
+}
+//初始化双向箭头的链表 
+void Initlinklist6()
+{
+	mybidirectionalconnection* p;
+	p = malloc(sizeof(mybidirectionalconnection));
+	if (p == NULL)
+	{
+		exit(0);
+	}
+	p->x = 0;
+	p->y = 0;
+	p->next = NULL;
+	bidirectionalconnection_head = p;
+
+}
+//将双向箭头压入链表 
+void pushbidirectionalconnection(mybidirectionalconnection* source)
+{
+	mybidirectionalconnection* p = bidirectionalconnection_head;
+	while (p->next != NULL)
+	{
+		p = p->next;
+	}
+	p->next = source;
+	return;
+}
+//初始化虚线的链表 
+void Initlinklist7()
+{
+	mydashline* p;
+	p = malloc(sizeof(mydashline));
+	if (p == NULL)
+	{
+		exit(0);
+	}
+	p->x1 = 0;
+	p->y1 = 0;
+	p->next = NULL;
+	dashline_head = p;
+
+}
+//将虚线压入链表
+void pushdashline(mydashline* source)
+{
+	mydashline* p = dashline_head;
+	while (p->next != NULL)
+	{
+		p = p->next;
+	}
+	p->next = source;
+	return;
+}
+//初始化process的链表 
+void Initlinklist8()
+{
+	myprocess* p;
+	p = malloc(sizeof(myprocess));
+	if (p == NULL)
+	{
+		exit(0);
+	}
+	p->x = 0;
+	p->y = 0;
+	p->next = NULL;
+	process_head = p;
+
+}
+//将process压入链表 
+void pushprocess(myprocess* source)
+{
+	myprocess* p = process_head;
+	while (p->next != NULL)
+	{
+		p = p->next;
+	}
+	p->next = source;
+	return;
+}
+//初始化圆形的链表 
+void Initlinklist9()
+{
+	mycircle* p;
+	p = malloc(sizeof(mycircle));
+	if (p == NULL)
+	{
+		exit(0);
+	}
+	p->x = 0;
+	p->y = 0;
+	p->next = NULL;
+	circle_head = p;
+
+}
+//将圆形压入链表 
+void pushcircle(mycircle* source)
+{
+	mycircle* p = circle_head;
+	while (p->next != NULL)
+	{
+		p = p->next;
+	}
+	p->next = source;
+	return;
+}
+//初始化椭圆的链表 
+void Initlinklist10()
+{
+	myoval* p;
+	p = malloc(sizeof(myoval));
+	if (p == NULL)
+	{
+		exit(0);
+	}
+	p->x = 0;
+	p->y = 0;
+	p->next = NULL;
+	oval_head = p;
+
+}
+//将椭圆压入链表 
+void pushoval(myoval* source)
+{
+	myoval* p = oval_head;
+	while (p->next != NULL)
+	{
+		p = p->next;
+	}
+	p->next = source;
+	return;
+}
+/*
+	删除选中的图元的函数定义
+*/ 
 void pop()
 {
 	switch (select_what)
 	{
-	case 1:
+	case 1://删除矩形 
 	{
 		myrect* p = rect_head->next;
 		if (p == ((myrect*)select_ptr))
@@ -115,7 +290,7 @@ void pop()
 		free(((myrect*)select_ptr));
 		break;
 	}
-	case 2:
+	case 2://删除圆角矩形 
 	{
 		myroundrect* p = roundrect_head->next;
 		if (p == ((myroundrect*)select_ptr))
@@ -132,7 +307,7 @@ void pop()
 		free(((myroundrect*)select_ptr));
 		break;
 	}
-	case 3:
+	case 3://删除菱形 
 	{
 		mydiamond* p = diamond_head->next;
 		if (p == ((mydiamond*)select_ptr))
@@ -149,7 +324,7 @@ void pop()
 		free(((mydiamond*)select_ptr));
 		break;
 	}
-	case 4:
+	case 4://删除直线 
 	{
 		myline* p = line_head->next;
 		if (p == ((myline*)select_ptr))
@@ -166,7 +341,7 @@ void pop()
 		free(((myline*)select_ptr));
 		break;
 	}
-	case 5:
+	case 5://删除单向箭头 
 	{
 		mydirectionalconnection* p = directionalconnection_head->next;
 		if (p == ((mydirectionalconnection*)select_ptr))
@@ -183,7 +358,7 @@ void pop()
 		free(((mydirectionalconnection*)select_ptr));
 		break;
 	}
-	case 6:
+	case 6://删除双向箭头 
 	{
 		mybidirectionalconnection* p = bidirectionalconnection_head->next;
 		if (p == ((mybidirectionalconnection*)select_ptr))
@@ -200,7 +375,7 @@ void pop()
 		free(((mybidirectionalconnection*)select_ptr));
 		break;
 	}
-	case 7:
+	case 7://删除虚线 
 	{
 		mydashline* p = dashline_head->next;
 		if (p == ((mydashline*)select_ptr))
@@ -217,7 +392,7 @@ void pop()
 		free(((mydashline*)select_ptr));
 		break;
 	}
-	case 8:
+	case 8://删除process 
 	{
 		myprocess* p = process_head->next;
 		if (p == ((myprocess*)select_ptr))
@@ -234,7 +409,7 @@ void pop()
 		free(((myprocess*)select_ptr));
 		break;
 	}
-	case 9:
+	case 9://删除圆形 
 	{
 		mycircle* p = circle_head->next;
 		if (p == ((mycircle*)select_ptr))
@@ -251,7 +426,7 @@ void pop()
 		free(((mycircle*)select_ptr));
 		break;
 	}
-	case 10:
+	case 10://删除椭圆 
 	{
 		myoval* p = oval_head->next;
 		if (p == ((myoval*)select_ptr))
@@ -270,180 +445,8 @@ void pop()
 	}
 	}
 }
-void Initlinklist4()
-{
-	myline* p;
-	p = malloc(sizeof(myline));
-	if (p == NULL)
-	{
-		exit(0);
-	}
-	p->x1 = 0;
-	p->y1 = 0;
-	p->next = NULL;
-	line_head = p;
 
-}
-
-//将虚线压入链表
-void pushdashline(mydashline* source)
-{
-	mydashline* p = dashline_head;
-	while (p->next != NULL)
-	{
-		p = p->next;
-	}
-	p->next = source;
-	return;
-}
-
-void Initlinklist7()
-{
-	mydashline* p;
-	p = malloc(sizeof(mydashline));
-	if (p == NULL)
-	{
-		exit(0);
-	}
-	p->x1 = 0;
-	p->y1 = 0;
-	p->next = NULL;
-	dashline_head = p;
-
-}
-
-
-void pushdirectionalconnection(mydirectionalconnection* source)
-{
-	mydirectionalconnection* p = directionalconnection_head;
-	while (p->next != NULL)
-	{
-		p = p->next;
-	}
-	p->next = source;
-	return;
-}
-
-void Initlinklist5()
-{
-	mydirectionalconnection* p;
-	p = malloc(sizeof(mydirectionalconnection));
-	if (p == NULL)
-	{
-		exit(0);
-	}
-	p->x = 0;
-	p->y = 0;
-	p->next = NULL;
-	directionalconnection_head = p;
-
-}
-
-
-void pushbidirectionalconnection(mybidirectionalconnection* source)
-{
-	mybidirectionalconnection* p = bidirectionalconnection_head;
-	while (p->next != NULL)
-	{
-		p = p->next;
-	}
-	p->next = source;
-	return;
-}
-
-void Initlinklist6()
-{
-	mybidirectionalconnection* p;
-	p = malloc(sizeof(mybidirectionalconnection));
-	if (p == NULL)
-	{
-		exit(0);
-	}
-	p->x = 0;
-	p->y = 0;
-	p->next = NULL;
-	bidirectionalconnection_head = p;
-
-}
-
-
-void pushprocess(myprocess* source)
-{
-	myprocess* p = process_head;
-	while (p->next != NULL)
-	{
-		p = p->next;
-	}
-	p->next = source;
-	return;
-}
-void Initlinklist8()
-{
-	myprocess* p;
-	p = malloc(sizeof(myprocess));
-	if (p == NULL)
-	{
-		exit(0);
-	}
-	p->x = 0;
-	p->y = 0;
-	p->next = NULL;
-	process_head = p;
-
-}
-
-
-void pushcircle(mycircle* source)
-{
-	mycircle* p = circle_head;
-	while (p->next != NULL)
-	{
-		p = p->next;
-	}
-	p->next = source;
-	return;
-}
-
-void Initlinklist9()
-{
-	mycircle* p;
-	p = malloc(sizeof(mycircle));
-	if (p == NULL)
-	{
-		exit(0);
-	}
-	p->x = 0;
-	p->y = 0;
-	p->next = NULL;
-	circle_head = p;
-
-}
-void pushoval(myoval* source)
-{
-	myoval* p = oval_head;
-	while (p->next != NULL)
-	{
-		p = p->next;
-	}
-	p->next = source;
-	return;
-}
-
-void Initlinklist10()
-{
-	myoval* p;
-	p = malloc(sizeof(myoval));
-	if (p == NULL)
-	{
-		exit(0);
-	}
-	p->x = 0;
-	p->y = 0;
-	p->next = NULL;
-	oval_head = p;
-
-}
-//2020/5/26 23:04添加关于打开文件得函数
+//2020/5/26 23:04添加关于打开文件的函数
 int open()
 {
 	char szFile[MAX_PATH] = { 0 };
@@ -482,7 +485,7 @@ int open()
 	Initlinklist9();
 	Initlinklist10();
 
-	FileOpenDialog(szFile);//szFile中返回了再文件选择窗口选择得文件得路径
+	FileOpenDialog(szFile);//szFile中返回了在文件选择窗口选择文件的路径
 	if (strlen(szFile) == 0)
 	{
 		MessageBox(NULL, "Please choose a File", "Waring", MB_OK | MB_ICONWARNING);
@@ -500,11 +503,11 @@ int open()
 	}
 	string[i] = 0;
 	SetWindowTitle(string);
-	//1:load rectangle
+	//1:load rectangle 读取矩形 
 	char c = getc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
-	if (c == '#')
+	if (c == '#')//判断是否为空 
 	{
 
 	}
@@ -528,7 +531,7 @@ int open()
 			loadrect->next = NULL;
 			pushrect(loadrect);
 			c = getc(fp);
-			if (c == '@')
+			if (c == '@') //根据分隔符判断是否要继续读取 
 			{
 				c = getc(fp);
 				c = getc(fp);
@@ -540,12 +543,12 @@ int open()
 		}
 	}
 
-	//2:load roundrectangle
+	//2:load roundrectangle 读取圆角矩形 
 	c = getc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
-	if (c == '#')
+	if (c == '#')//判断是否为空 
 	{
 
 	}
@@ -569,7 +572,7 @@ int open()
 			loadroundrect->next = NULL;
 			pushroundrect(loadroundrect);
 			c = getc(fp);
-			if (c == '@')
+			if (c == '@') //根据分隔符判断是否要继续读取 
 			{
 				c = getc(fp);
 				c = getc(fp);
@@ -581,12 +584,12 @@ int open()
 		}
 	}
 
-	//3:load diamond
+	//3:load diamond 读取菱形 
 	c = getc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
-	if (c == '#')
+	if (c == '#')//判断是否为空 
 	{
 
 	}
@@ -610,7 +613,7 @@ int open()
 			loaddiamond->next = NULL;
 			pushdiamond(loaddiamond);
 			c = getc(fp);
-			if (c == '@')
+			if (c == '@') //根据分隔符判断是否要继续读取 
 			{
 				c = getc(fp);
 				c = getc(fp);
@@ -622,12 +625,12 @@ int open()
 		}
 	}
 
-	//4:load line
+	//4:load line 读取直线 
 	c = getc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
-	if (c == '#')
+	if (c == '#')//判断是否为空 
 	{
 
 	}
@@ -644,7 +647,7 @@ int open()
 			loadline->next = NULL;
 			pushline(loadline);
 			c = getc(fp);
-			if (c == '@')
+			if (c == '@') //根据分隔符判断是否要继续读取 
 			{
 				c = getc(fp);
 				c = getc(fp);
@@ -656,12 +659,12 @@ int open()
 		}
 	}
 
-	//5:loaddashline
+	//5:loaddashline 读取虚线 
 	c = getc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
-	if (c == '#')
+	if (c == '#')//判断是否为空 
 	{
 
 	}
@@ -678,7 +681,7 @@ int open()
 			loaddashline->next = NULL;
 			pushdashline(loaddashline);
 			c = getc(fp);
-			if (c == '@')
+			if (c == '@') //根据分隔符判断是否要继续读取 
 			{
 				c = getc(fp);
 				c = getc(fp);
@@ -690,12 +693,12 @@ int open()
 		}
 	}
 
-	//6:load directionalconnection
+	//6:load directionalconnection 读取单向箭头 
 	c = getc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
-	if (c == '#')
+	if (c == '#')//判断是否为空 
 	{
 
 	}
@@ -716,7 +719,7 @@ int open()
 			loaddirectionalconnection->next = NULL;
 			pushdirectionalconnection(loaddirectionalconnection);
 			c = getc(fp);
-			if (c == '@')
+			if (c == '@') //根据分隔符判断是否要继续读取 
 			{
 				c = getc(fp);
 				c = getc(fp);
@@ -728,12 +731,12 @@ int open()
 		}
 	}
 
-	//7:load bidirectionalconnection
+	//7:load bidirectionalconnection 读取双向箭头 
 	c = getc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
-	if (c == '#')
+	if (c == '#')//判断是否为空 
 	{
 
 	}
@@ -754,11 +757,11 @@ int open()
 			loadbidirectionalconnection->next = NULL;
 			pushbidirectionalconnection(loadbidirectionalconnection);
 			c = getc(fp);
-			if (c == '@')
+			if (c == '@') //根据分隔符判断是否要继续读取 
 			{
 				c = getc(fp);
 				c = getc(fp);
-				if (c == '#')
+				if (c == '#') 
 					break;
 				else
 					fseek(fp, -1, SEEK_CUR);
@@ -766,12 +769,12 @@ int open()
 		}
 	}
 
-	//8:load process
+	//8:load process 读取process 
 	c = getc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
-	if (c == '#')
+	if (c == '#')//判断是否为空 
 	{
 
 	}
@@ -795,7 +798,7 @@ int open()
 			loadprocess->next = NULL;
 			pushprocess(loadprocess);
 			c = getc(fp);
-			if (c == '@')
+			if (c == '@') //根据分隔符判断是否要继续读取 
 			{
 				c = getc(fp);
 				c = getc(fp);
@@ -807,12 +810,12 @@ int open()
 		}
 	}
 
-	//9:load circle
+	//9:load circle 读取圆形 
 	c = getc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
-	if (c == '#')
+	if (c == '#')//判断是否为空 
 	{
 
 	}
@@ -836,7 +839,7 @@ int open()
 			loadcircle->next = NULL;
 			pushcircle(loadcircle);
 			c = getc(fp);
-			if (c == '@')
+			if (c == '@') //根据分隔符判断是否要继续读取 
 			{
 				c = getc(fp);
 				c = getc(fp);
@@ -848,12 +851,12 @@ int open()
 		}
 	}
 
-	//10:load oval
+	//10:load oval 读取椭圆 
 	c = getc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
 	c = fgetc(fp);
-	if (c == '#')
+	if (c == '#')//判断是否为空 
 	{
 
 	}
@@ -877,7 +880,7 @@ int open()
 			loadoval->next = NULL;
 			pushoval(loadoval);
 			c = getc(fp);
-			if (c == '@')
+			if (c == '@') //根据分隔符判断是否要继续读取 
 			{
 				c = getc(fp);
 				c = getc(fp);
@@ -892,7 +895,11 @@ int open()
 	fclose(fp);
 	return 1;
 }
-void savemyrect(myrect* source)
+
+/*
+	关于分别储存10种图形到文件的函数定义
+*/ 
+void savemyrect(myrect* source) //储存矩形图元函数定义  
 {
 	fprintf(fp, "#\n");
 	if (source->next == NULL)
@@ -914,7 +921,7 @@ void savemyrect(myrect* source)
 
 }
 
-void savemyroundrect(myroundrect* source)
+void savemyroundrect(myroundrect* source) //储存圆角矩形图元函数定义  
 {
 	fprintf(fp, "#\n");
 	if (source->next == NULL)
@@ -935,7 +942,7 @@ void savemyroundrect(myroundrect* source)
 	fprintf(fp, "%c\n", '#');//设置分隔符“#”
 }
 
-void savemymdiamond(mydiamond* source)
+void savemymdiamond(mydiamond* source) //储存菱形图元函数定义  
 {
 	fprintf(fp, "#\n");
 	if (source->next == NULL)
@@ -956,7 +963,7 @@ void savemymdiamond(mydiamond* source)
 	fprintf(fp, "%c\n", '#');//设置分隔符“#”
 }
 
-void savemyline(myline* source)
+void savemyline(myline* source) //储存直线图元函数定义  
 {
 	fprintf(fp, "#\n");
 	if (source->next == NULL)
@@ -977,7 +984,7 @@ void savemyline(myline* source)
 	fprintf(fp, "%c\n", '#');//设置分隔符“#”
 }
 
-void savemydashline(mydashline* source)
+void savemydashline(mydashline* source) //储存虚线图元函数定义  
 {
 	fprintf(fp, "#\n");
 	if (source->next == NULL)
@@ -999,7 +1006,7 @@ void savemydashline(mydashline* source)
 
 
 }
-void savemydirectionalconnection(mydirectionalconnection* source)
+void savemydirectionalconnection(mydirectionalconnection* source) //储存单向箭头图元函数定义  
 {
 	fprintf(fp, "#\n");
 	if (source->next == NULL)
@@ -1019,7 +1026,7 @@ void savemydirectionalconnection(mydirectionalconnection* source)
 	fprintf(fp, "%c\n", '#');//设置分隔符“#”
 }
 
-void savemybidirectionalconnection(mybidirectionalconnection* source)
+void savemybidirectionalconnection(mybidirectionalconnection* source) //储存双向箭头图元函数定义  
 {
 	fprintf(fp, "#\n");
 		if (source->next == NULL)
@@ -1039,7 +1046,7 @@ void savemybidirectionalconnection(mybidirectionalconnection* source)
 	fprintf(fp, "%c\n", '#');//设置分隔符“#”
 }
 
-void savemyprocess(myprocess* source)
+void savemyprocess(myprocess* source) //储存process图元函数定义 
 {
 	fprintf(fp, "#\n");
 	if (source->next == NULL)
@@ -1060,7 +1067,7 @@ void savemyprocess(myprocess* source)
 	fprintf(fp, "%c\n", '#');//设置分隔符“#”
 }
 
-void savemycircle(mycircle* source)
+void savemycircle(mycircle* source) //储存圆形图元 
 {
 	fprintf(fp, "#\n");
 	if (source->next == NULL)
@@ -1082,7 +1089,7 @@ void savemycircle(mycircle* source)
 	fprintf(fp, "%c\n", '#');//设置分隔符“#”
 }
 
-void savemyoval(myoval* source)
+void savemyoval(myoval* source) //储存椭圆图元函数定义 
 {
 	fprintf(fp, "#\n");
 	if (source->next == NULL)
@@ -1103,6 +1110,7 @@ void savemyoval(myoval* source)
 	}
 	fprintf(fp, "%c\n", '#');//设置分隔符“#”
 }
+// 储存函数定义 
 int save()
 {
 	char szFile[MAX_PATH] = { 0 };
@@ -1159,11 +1167,12 @@ int save()
 	save_flag = 1;
 	return 1;
 }
+//复制图形的函数定义 
 void copy()
 {
 	switch (select_what)
 	{
-	case 1:
+	case 1://复制矩形 
 	{
 		myrect* a = malloc(sizeof(myrect));
 		memcpy(a, ((myrect*)select_ptr), sizeof(myrect));
@@ -1174,7 +1183,7 @@ void copy()
 		copy_ptr = a;
 		break;
 	}
-	case 2:
+	case 2://复制圆角矩形 
 	{
 		myroundrect* a = malloc(sizeof(myroundrect));
 		memcpy(a, ((myroundrect*)select_ptr), sizeof(myroundrect));
@@ -1185,7 +1194,7 @@ void copy()
 		copy_ptr = a;
 		break;
 	}
-	case 3:
+	case 3://复制菱形 
 	{
 		mydiamond* a = malloc(sizeof(mydiamond));
 		memcpy(a, ((mydiamond*)select_ptr), sizeof(mydiamond));
@@ -1196,7 +1205,7 @@ void copy()
 		copy_ptr = a;
 		break;
 	}
-	case 4:
+	case 4://复制直线 
 	{
 		myline* a = malloc(sizeof(myline));
 		memcpy(a, ((myline*)select_ptr), sizeof(myline));
@@ -1207,7 +1216,7 @@ void copy()
 		copy_ptr = a;
 		break;
 	}
-	case 5:
+	case 5://复制单向箭头 
 	{
 		mydirectionalconnection* a = malloc(sizeof(mydirectionalconnection));
 		memcpy(a, ((mydirectionalconnection*)select_ptr), sizeof(mydirectionalconnection));
@@ -1218,7 +1227,7 @@ void copy()
 		copy_ptr = a;
 		break;
 	}
-	case 6:
+	case 6://复制双向箭头 
 	{
 		mybidirectionalconnection* a = malloc(sizeof(mybidirectionalconnection));
 		memcpy(a, ((mybidirectionalconnection*)select_ptr), sizeof(mybidirectionalconnection));
@@ -1229,7 +1238,7 @@ void copy()
 		copy_ptr = a;
 		break;
 	}
-	case 8:
+	case 8://复制process 
 	{
 		myprocess* a = malloc(sizeof(myprocess));
 		memcpy(a, ((myprocess*)select_ptr), sizeof(myprocess));
@@ -1240,7 +1249,7 @@ void copy()
 		copy_ptr = a;
 		break;
 	}
-	case 7:
+	case 7://复制虚线 
 	{
 		mydashline* a = malloc(sizeof(mydashline));
 		memcpy(a, ((mydashline*)select_ptr), sizeof(mydashline));
@@ -1251,7 +1260,7 @@ void copy()
 		copy_ptr = a;
 		break;
 	}
-	case 9:
+	case 9://复制圆形 
 	{
 		mycircle* a = malloc(sizeof(mycircle));
 		memcpy(a, ((mycircle*)select_ptr), sizeof(mycircle));
@@ -1262,7 +1271,7 @@ void copy()
 		copy_ptr = a;
 		break;
 	}
-	case 10:
+	case 10://复制椭圆 
 	{
 		myoval* a = malloc(sizeof(myoval));
 		memcpy(a, ((myoval*)select_ptr), sizeof(myoval));
@@ -1275,65 +1284,66 @@ void copy()
 	}
 	}
 }
+//粘贴函数的函数定义 
 void paste()
 {
 	switch (copy_what)
 	{
-	case 1:
+	case 1://粘贴矩形 
 	{
 		pushrect(copy_ptr);
 		copy_ptr = NULL;
 		break;
 	}
-	case 2:
+	case 2://粘贴圆角矩形 
 	{
 		pushroundrect(copy_ptr);
 		copy_ptr = NULL;
 		break;
 	}
-	case 4:
-	{
-		pushline(copy_ptr);
-		copy_ptr = NULL;
-		break;
-	}
-	case 3:
+	case 3://粘贴菱形 
 	{
 		pushdiamond(copy_ptr);
 		copy_ptr = NULL;
 		break;
 	}
-	case 5:
+	case 4://粘贴直线 
+	{
+		pushline(copy_ptr);
+		copy_ptr = NULL;
+		break;
+	}
+	case 5://粘贴单向箭头 
 	{
 		pushdirectionalconnection(copy_ptr);
 		copy_ptr = NULL;
 		break;
 	}
-	case 6:
+	case 6://粘贴双向箭头 
 	{
 		pushbidirectionalconnection(copy_ptr);
 		copy_ptr = NULL;
 		break;
 	}
-	case 7:
+	case 7://粘贴虚线 
 	{
 		pushdashline(copy_ptr);
 		copy_ptr = NULL;
 		break;
 	}
-	case 8:
+	case 8://粘贴process 
 	{
 		pushprocess(copy_ptr);
 		copy_ptr = NULL;
 		break;
 	}
-	case 9:
+	case 9://粘贴圆形 
 	{
 		pushcircle(copy_ptr);
 		copy_ptr = NULL;
 		break;
 	}
-	case 10:
+	case 10://粘贴椭圆 
 	{
 		pushoval(copy_ptr);
 		copy_ptr = NULL;
@@ -1341,8 +1351,8 @@ void paste()
 	}
 	}
 }
-
-void cut()
+//剪切图形的函数定义 
+void cut() 
 {
 	copy();
 	pop();

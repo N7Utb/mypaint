@@ -2,7 +2,7 @@
 
 // 返回值: 成功 1, 失败 0
 // 通过 path 返回获取的路径
-int FileOpenDialog(char* path)
+int FileOpenDialog(char* path)	//关于打开文件的文件管理器的函数定义 
 {
 	OPENFILENAME ofn;
 	ZeroMemory(&ofn, sizeof(ofn));
@@ -13,7 +13,7 @@ int FileOpenDialog(char* path)
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 	return GetOpenFileName(&ofn);
 }
-int FileSaveDialog(char* path)
+int FileSaveDialog(char* path)	//关于保存文件的文件管理器的函数定义 
 {
 	OPENFILENAME ofn;
 	ZeroMemory(&ofn, sizeof(ofn));

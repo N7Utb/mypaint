@@ -260,14 +260,8 @@ void upper()
 		{
 			return;
 		}
-		if (((mydashline*)select_ptr)->dy > 0)  ((mydashline*)select_ptr)->dy += Ratio_of_dy_to_dx * 0.1;
-		else if (((mydashline*)select_ptr)->dy < 0)  ((mydashline*)select_ptr)->dy -= Ratio_of_dy_to_dx * 0.1;
-		else;
-
-		if (((mydashline*)select_ptr)->dx > 0)        ((mydashline*)select_ptr)->dx += 0.1;
-		else if (((mydashline*)select_ptr)->dx < 0)   ((mydashline*)select_ptr)->dx -= 0.1;
-		else;
-
+		((mydashline*)select_ptr)->dy += Ratio_of_dy_to_dx * 0.1;
+		((mydashline*)select_ptr)->dx += 0.1;
 		break;
 	}
 
@@ -396,18 +390,8 @@ void downer()
 		double ddx = fabs(((mydashline*)select_ptr)->dx);
 		double ddy = fabs(((mydashline*)select_ptr)->dy);
 
-		if (ddy >= (winheight - 3 * h) || ddx >= (winwidth - 30 * h))
-		{
-			return;
-		}
-		if (((mydashline*)select_ptr)->dy > 0)  ((mydashline*)select_ptr)->dy -= Ratio_of_dy_to_dx * 0.1;
-		else if (((mydashline*)select_ptr)->dy < 0)  ((mydashline*)select_ptr)->dy += Ratio_of_dy_to_dx * 0.1;
-		else;
-
-		if (((mydashline*)select_ptr)->dx > 0)        ((mydashline*)select_ptr)->dx -= 0.1;
-		else if (((mydashline*)select_ptr)->dx < 0)   ((mydashline*)select_ptr)->dx += 0.1;
-		else;
-
+		((mydashline*)select_ptr)->dy -= Ratio_of_dy_to_dx * 0.1;
+		((mydashline*)select_ptr)->dx -= 0.1;
 		break;
 	}
 
@@ -681,11 +665,180 @@ void changefillflag(int para)
 
 	}
 }
-void clockwiserotate()
+void anticlockwiserotate()// 逆时针旋转图形函数定义 
 {
+	double angle = 10; //对直线，虚线，单向箭头，双向箭头，一次旋转角度为10°。 
+	double pi = 3.14159265; 
+	switch (select_what)
+	{
+	case 1:	//旋转矩形 
+	{
+		double width0 = ((myrect*)select_ptr)->width; 
+		double height0 = ((myrect*)select_ptr)->height;
+		((myrect*)select_ptr)->width =  cos(90*pi/180) * width0 - sin(90*pi/180) *  height0;
+		((myrect*)select_ptr)->height =  sin(90*pi/180) * width0 + cos(90*pi/180) *  height0;
+		break;
+	}
+	case 2:	//旋转圆角矩形 
+	{
+		double width0 = ((myroundrect*)select_ptr)->width; 
+		double height0 = ((myroundrect*)select_ptr)->height;
+		((myroundrect*)select_ptr)->width =  cos(90*pi/180) * width0 - sin(90*pi/180) *  height0;
+		((myroundrect*)select_ptr)->height =  sin(90*pi/180) * width0 + cos(90*pi/180) *  height0;
+		break;
+	}
+	case 3:	//旋转菱形 
+	{
+		double width0 = ((mydiamond*)select_ptr)->width; 
+		double height0 = ((mydiamond*)select_ptr)->height;
+		((mydiamond*)select_ptr)->width =  cos(90*pi/180) * width0 - sin(90*pi/180) *  height0;
+		((mydiamond*)select_ptr)->height =  sin(90*pi/180) * width0 + cos(90*pi/180) *  height0;
+		break;
+	}
+	case 4:	//旋转直线 
+	{	
+		double dx0 = ((myline*)select_ptr)->dx;
+		double dy0 = ((myline*)select_ptr)->dy;
+		((myline*)select_ptr)->dx = cos(angle*pi/180) * dx0 - sin(angle*pi/180) *  dy0;
+		((myline*)select_ptr)->dy = sin(angle*pi/180) * dx0 + cos(angle*pi/180) *  dy0;
+		break;
+	}
+	case 5:	//旋转单向箭头 
+	{
+		double dx0 = ((mydirectionalconnection*)select_ptr)->dx;
+		double dy0 = ((mydirectionalconnection*)select_ptr)->dy;
+		((mydirectionalconnection*)select_ptr)->dx = cos(angle*pi/180) * dx0 - sin(angle*pi/180) *  dy0;
+		((mydirectionalconnection*)select_ptr)->dy = sin(angle*pi/180) * dx0 + cos(angle*pi/180) *  dy0;
+		break;
+	}
+	case 6:	//旋转双向箭头 
+	{
+		double dx0 = ((mybidirectionalconnection*)select_ptr)->dx;
+		double dy0 = ((mybidirectionalconnection*)select_ptr)->dy;
+		((mybidirectionalconnection*)select_ptr)->dx = cos(angle*pi/180) * dx0 - sin(angle*pi/180) *  dy0;
+		((mybidirectionalconnection*)select_ptr)->dy = sin(angle*pi/180) * dx0 + cos(angle*pi/180) *  dy0;
+		break;
+	}
+	case 7:	//旋转虚线 
+	{
+		double dx0 = ((mydashline*)select_ptr)->dx;
+		double dy0 = ((mydashline*)select_ptr)->dy;
+		((mydashline*)select_ptr)->dx = cos(angle*pi/180) * dx0 - sin(angle*pi/180) *  dy0;
+		((mydashline*)select_ptr)->dy = sin(angle*pi/180) * dx0 + cos(angle*pi/180) *  dy0;
+		break;
+	}
+	case 8:	//旋转process 
+	{
+		double pi = 3.14159265;
+		double width0 = ((myprocess*)select_ptr)->width; 
+		double height0 = ((myprocess*)select_ptr)->height;
+		((myprocess*)select_ptr)->width =  cos(180*pi/180) * width0 - sin(180*pi/180) *  height0;
+		((myprocess*)select_ptr)->height =  sin(180*pi/180) * width0 + cos(180*pi/180) *  height0;
+		break;
+	}
+	case 9:
+	{
+
+		break;
+	}
+	case 10:	//旋转椭圆 
+	{
+		double rx0 = ((myoval*)select_ptr)->rx; 
+		double ry0 = ((myoval*)select_ptr)->ry;
+		((myoval*)select_ptr)->rx =  cos(90*pi/180) * rx0 - sin(90*pi/180) *  ry0;
+		((myoval*)select_ptr)->ry =  sin(90*pi/180) * rx0 + cos(90*pi/180) *  ry0;
+		break;
+
+	}
+
+	}
 
 }
-void anticlockwiserotate()
+void clockwiserotate()	//顺时针旋转图形函数定义 
 {
+
+	double angle = -10;	//对直线，虚线，单向箭头，双向箭头，一次旋转角度为10°。 
+	double pi = 3.14159265; 
+	switch (select_what)
+	{
+	case 1:	//旋转矩形 
+	{
+
+		double width0 = ((myrect*)select_ptr)->width; 
+		double height0 = ((myrect*)select_ptr)->height;
+		((myrect*)select_ptr)->width =  cos(-90*pi/180) * width0 - sin(-90*pi/180) *  height0;
+		((myrect*)select_ptr)->height =  sin(-90*pi/180) * width0 + cos(-90*pi/180) *  height0;
+		break;
+	}
+	case 2:	//旋转圆角矩形 
+	{
+		double width0 = ((myroundrect*)select_ptr)->width; 
+		double height0 = ((myroundrect*)select_ptr)->height;
+		((myroundrect*)select_ptr)->width =  cos(-90*pi/180) * width0 - sin(-90*pi/180) *  height0;
+		((myroundrect*)select_ptr)->height =  sin(-90*pi/180) * width0 + cos(-90*pi/180) *  height0;
+		break;
+	}
+	case 3:	//旋转菱形 
+	{
+		double width0 = ((mydiamond*)select_ptr)->width; 
+		double height0 = ((mydiamond*)select_ptr)->height;
+		((mydiamond*)select_ptr)->width =  cos(-90*pi/180) * width0 - sin(-90*pi/180) *  height0;
+		((mydiamond*)select_ptr)->height =  sin(-90*pi/180) * width0 + cos(-90*pi/180) *  height0;
+		break;
+	}
+	case 4:	//旋转直线 
+	{	
+		double dx0 = ((myline*)select_ptr)->dx;
+		double dy0 = ((myline*)select_ptr)->dy;
+		((myline*)select_ptr)->dx = cos(angle*pi/180) * dx0 - sin(angle*pi/180) *  dy0;
+		((myline*)select_ptr)->dy = sin(angle*pi/180) * dx0 + cos(angle*pi/180) *  dy0;
+		break;
+	}
+	case 5:	//旋转单向箭头 
+	{
+		double dx0 = ((mydirectionalconnection*)select_ptr)->dx;
+		double dy0 = ((mydirectionalconnection*)select_ptr)->dy;
+		((mydirectionalconnection*)select_ptr)->dx = cos(angle*pi/180) * dx0 - sin(angle*pi/180) *  dy0;
+		((mydirectionalconnection*)select_ptr)->dy = sin(angle*pi/180) * dx0 + cos(angle*pi/180) *  dy0;
+		break;
+	}
+	case 6:	//旋转双向箭头 
+	{
+		double dx0 = ((mybidirectionalconnection*)select_ptr)->dx;
+		double dy0 = ((mybidirectionalconnection*)select_ptr)->dy;
+		((mybidirectionalconnection*)select_ptr)->dx = cos(angle*pi/180) * dx0 - sin(angle*pi/180) *  dy0;
+		((mybidirectionalconnection*)select_ptr)->dy = sin(angle*pi/180) * dx0 + cos(angle*pi/180) *  dy0;
+		break;
+	}
+	case 7:	//旋转虚线 
+	{
+		double dx0 = ((mydashline*)select_ptr)->dx;
+		double dy0 = ((mydashline*)select_ptr)->dy;
+		((mydashline*)select_ptr)->dx = cos(angle*pi/180) * dx0 - sin(angle*pi/180) *  dy0;
+		((mydashline*)select_ptr)->dy = sin(angle*pi/180) * dx0 + cos(angle*pi/180) *  dy0;
+		break;
+	}
+	case 8: //旋转process 
+	{
+		double width0 = ((myprocess*)select_ptr)->width; 
+		double height0 = ((myprocess*)select_ptr)->height;
+		((myprocess*)select_ptr)->width =  cos(-180*pi/180) * width0 - sin(-180*pi/180) *  height0;
+		((myprocess*)select_ptr)->height =  sin(-180*pi/180) * width0 + cos(-180*pi/180) *  height0;
+		break;
+	}
+	case 9:
+	{
+		break;
+	}
+	case 10: //旋转椭圆 
+	{
+		double rx0 = ((myoval*)select_ptr)->rx; 
+		double ry0 = ((myoval*)select_ptr)->ry;
+		((myoval*)select_ptr)->rx =  cos(-90*pi/180) * rx0 - sin(-90*pi/180) *  ry0;
+		((myoval*)select_ptr)->ry =  sin(-90*pi/180) * rx0 + cos(-90*pi/180) *  ry0;
+		break;
+	}
+
+	}
 
 }
