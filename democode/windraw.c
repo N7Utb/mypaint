@@ -270,7 +270,7 @@ void Initwin()
 	}
 	else if (selection == 2)
 	{
-		if(MessageBox(NULL,"Copy | Ctrl+C\nPaste | Ctrl+V\nWant to see more please go to our home","Shortcut List",MB_OKCANCEL)==IDOK)
+		if(MessageBox(NULL,"Copy | Ctrl+C\nPaste | Ctrl+V\nDelete | Delete\nSave | Ctrl+S\nNew | Ctrl+N\nOpen | Ctrl+O\nWant to see more please go to our home","Shortcut List",MB_OKCANCEL)==IDOK)
 		{
 			system("start https://github.com/Vainlory/mypaint.git");
 		}
@@ -1044,7 +1044,14 @@ void CharEventProcess(char ch)
 void KeyboardEventProcess(int key, int event)
 {
 	uiGetKeyboard(key, event); // GUIªÒ»°º¸≈Ã
-
+	if (key == 0x2e)
+	{
+		if (operate_flag == 2)
+		{
+			pop();
+			operate_flag = 0;
+		}
+	}
 
 }
 
