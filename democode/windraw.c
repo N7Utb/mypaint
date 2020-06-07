@@ -745,9 +745,9 @@ void InitButton()
 
 //画一个圆角矩形
 void drawRoundrec(double x, double y, double w, double h, int fillflag)
-	{
+{
 	MovePen(x, y);
-	if( fillflag ) StartFilledRegion(1); 
+	if (fillflag) StartFilledRegion(1);
 	{
 		if (h > 0 && w > 0)  //右上 
 		{
@@ -755,7 +755,7 @@ void drawRoundrec(double x, double y, double w, double h, int fillflag)
 			DrawLine(w, 0);
 			DrawEllipticalArc(w / 6, h / 6, 270, 90);
 			DrawLine(0, h);
-			DrawEllipticalArc(w / 6, h/ 6, 0, 90);
+			DrawEllipticalArc(w / 6, h / 6, 0, 90);
 			DrawLine(-w, 0);
 			DrawEllipticalArc(w / 6, h / 6, 90, 90);
 			DrawLine(0, -h);
@@ -776,30 +776,30 @@ void drawRoundrec(double x, double y, double w, double h, int fillflag)
 		else if (h > 0 && w < 0) //左上
 		{
 			MovePen(x, y);
-			DrawLine(w, 0);
-			DrawEllipticalArc(-w / 6, h / 6, 270, -90);
 			DrawLine(0, h);
-			DrawEllipticalArc(-w / 6, h / 6, 180, -90);
-			DrawLine(-w, 0);
-			DrawEllipticalArc(-w / 6, h / 6, 90, -90);
+			DrawEllipticalArc(-w / 6, h / 6, 0, 90);
+			DrawLine(w, 0);
+			DrawEllipticalArc(-w / 6, h / 6, 90, 90);
 			DrawLine(0, -h);
-			DrawEllipticalArc(-w / 6, h / 6, 0, -90);
+			DrawEllipticalArc(-w / 6, h / 6, 180, 90);
+			DrawLine(-w, 0);
+			DrawEllipticalArc(-w / 6, h / 6, 270, 90);
 		}
 		else if (h < 0 && w>0)   //右下
 		{
 			MovePen(x, y);
-			DrawLine(w, 0);
-			DrawEllipticalArc(w / 6, -h / 6, 90, -90);
 			DrawLine(0, h);
-			DrawEllipticalArc(w / 6, -h / 6, 0, -90);
-			DrawLine(-w, 0);
-			DrawEllipticalArc(w / 6, -h / 6, 270, -90);
+			DrawEllipticalArc(w / 6, -h / 6, 180, 90);
+			DrawLine(w, 0);
+			DrawEllipticalArc(w / 6, -h / 6, 270, 90);
 			DrawLine(0, -h);
-			DrawEllipticalArc(w / 6, -h / 6, 180, -90);
+			DrawEllipticalArc(w / 6, -h / 6, 0, 90);
+			DrawLine(-w, 0);
+			DrawEllipticalArc(w / 6, -h / 6, 90, 90);
 		}
 
 	}
-	if( fillflag ) EndFilledRegion();
+	if (fillflag) EndFilledRegion();
 }
 
 //画一个菱形 
