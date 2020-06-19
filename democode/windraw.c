@@ -302,9 +302,7 @@ void Initwin()
 		front_color = selection - 1;
 		if (operate_flag == 2)
 		{
-			changefontcolor(selection);
-			
-			
+			changefontcolor(selection-1);
 		}
 	}
 	//对齐菜单
@@ -577,7 +575,7 @@ void InitButton()
 		drawLabel(winwidth - 6 * h, 0.25 * h, "Moving");
 	//显示当前的字体颜色和填充颜色
 	drawLabel(winwidth - 13 * h, 0.25 * h, "Font Color:");
-	if (operate_flag == 2)
+	if (operate_flag == 2|| operate_flag==3)
 	{
 		switch (select_what)
 		{
@@ -637,7 +635,7 @@ void InitButton()
 	else 
 		drawLabel(winwidth - 9.5 * h, 0.25 * h, bColors[front_color]);
 	drawLabel(winwidth - 19 * h, 0.25 * h, "Fill Color:");
-	if (operate_flag == 2)
+	if (operate_flag == 2||operate_flag==3)
 	{
 		switch (select_what)
 		{
@@ -1368,6 +1366,14 @@ int  select_graphic(double mx,double my)
 			strcpy(mytext, "");
 			return 1;
 		}
+		else if ((mx >= (o->dx * (my - o->y1) / o->dy + o->x1 - 0.1)) && (mx <= (o->dx * (my - o->y1) / o->dy + o->x1 + 0.1)))
+		{
+			operate_flag = 2;
+			select_ptr = o;
+			select_what = 4;
+			strcpy(mytext, "");
+			return 1;
+		}
 		o = o->next;
 	}
 	//选中菱形 
@@ -1396,6 +1402,14 @@ int  select_graphic(double mx,double my)
 			strcpy(mytext, "");
 			return 1;
 		}
+		else if ((mx >= (t->dx * (my - t->y) / t->dy + t->x - 0.1)) && (mx <= (t->dx * (my - t->y) / t->dy + t->x + 0.1)))
+		{
+			operate_flag = 2;
+			select_ptr = t;
+			select_what = 5;
+			strcpy(mytext, "");
+			return 1;
+		}
 		t = t->next;
 	}
 	//选中双向箭头 
@@ -1403,6 +1417,14 @@ int  select_graphic(double mx,double my)
 	while (u != NULL)
 	{
 		if ((my >= (u->dy * (mx - u->x) / u->dx + u->y - 0.1)) && (my <= (u->dy * (mx - u->x) / u->dx + u->y + 0.1)))
+		{
+			operate_flag = 2;
+			select_ptr = u;
+			select_what = 6;
+			strcpy(mytext, "");
+			return 1;
+		}
+		else if ((mx >= (u->dx * (my - u->y) / u->dy + u->x - 0.1)) && (mx <= (u->dx * (my - u->y) / u->dy + u->x + 0.1)))
 		{
 			operate_flag = 2;
 			select_ptr = u;
